@@ -13,13 +13,21 @@ import { AddStudentComponent } from './components/students/add-student/add-stude
 import { EditStudentComponent } from './components/students/edit-student/edit-student.component';
 import { ViewStudentComponent } from './components/students/view-student/view-student.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { ProfilComponent } from './components/profil/profil.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { TableComponent } from './components/table/table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -31,7 +39,8 @@ import { ProfilComponent } from './components/profil/profil.component';
     ViewStudentComponent,
     PageNotFoundComponent,
     SidebarComponent,
-    ProfilComponent
+    ProfilComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -40,11 +49,18 @@ import { ProfilComponent } from './components/profil/profil.component';
     MatSliderModule,
     MatIconModule,
     MatButtonModule,
-    MatGridListModule,
     MatToolbarModule,
     LayoutModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule,
+    DragDropModule,
+    MatCardModule,
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -49,7 +49,6 @@
   max-width: 100%;
   border: solid 1px #ccc;
   min-height: 60px;
-  display: block;
   background: white;
   border-radius: 4px;
   overflow: hidden;
@@ -60,7 +59,6 @@
   border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
@@ -92,44 +90,32 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.icon-container {
-  display: block;
-}
-.icon-container .mat-button {
-  min-width: 50px;
-  padding: 5px 20px;
-}
-
 @media screen and (min-width: 960px) {
   .box-1,
 .box-2 {
     flex-direction: row;
-    width: auto;
-    align-items: center;
-  }
-  .box-1 button,
-.box-2 button {
-    width: auto;
   }
   .box-1 {
-    left: 5px;
-    align-items: center;
+    left: 0px;
   }
   .box-1 span {
-    width: 100%;
+    flex: 1 0 auto;
   }
   .box-1 .mat-button-toggle-group {
     margin: 0 15px;
   }
   .box-2 {
-    right: 5px;
+    right: 0px;
+    justify-content: flex-end;
   }
   .box-2 button {
-    margin: 5px 15px;
+    width: auto;
+    margin-top: 5px;
+    margin-left: 15px;
   }
 }
 @media screen and (min-width: 1280px) {
   .grid-container {
-    margin: 10px 80px;
+    margin: 30px 80px;
   }
 }/*# sourceMappingURL=students.component.css.map */

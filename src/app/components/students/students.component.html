@@ -23,34 +23,45 @@
   </mat-grid-list>
 
   <div *ngIf="showLocation; else showLearnigYear">
-    <p>Behamberg</p>
-    <p>Haiho</p>
-    <p>Ernsthofen</p>
-  </div>
-
-  <ng-template #showLearnigYear>
-    <p>1. Lernjahr</p>
-    <p>2. Lernjahr</p>
-    <p>3. Lernjahr</p>
-  </ng-template>
-
-  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let student of students" cdkDragLockAxis="y" cdkDrag>
-
-      <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
-
-      {{student}}
-      <div class="icon-container">
-        <a mat-button color="accent" routerLink="/students/view/:studentName">
-          <mat-icon aria-label="edit_icon">visibility</mat-icon>
-        </a>
-        <a mat-button color="primary" routerLink="/students/edit/:studentName">
-          <mat-icon aria-label="edit_icon">edit</mat-icon>
-        </a>
-        <button mat-button color="warn">
-          <mat-icon aria-label="delete_icon">delete</mat-icon>
-        </button>
+    <div *ngFor="let location of locations">
+      <h3>{{location}}</h3>
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let student of dataSource" cdkDragLockAxis="y" cdkDrag>
+          <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
+          {{student.studentName}}
+          <a mat-button color="accent" routerLink="/students/view/:studentName">
+            <mat-icon aria-label="edit_icon">visibility</mat-icon>
+          </a>
+          <a mat-button color="primary" routerLink="/students/edit/:studentName">
+            <mat-icon aria-label="edit_icon">edit</mat-icon>
+          </a>
+          <button mat-button color="warn">
+            <mat-icon aria-label="delete_icon">delete</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
   </div>
+
+  <ng-template #showLearnigYear>
+    <div *ngFor="let year of learningYear">
+      <h3>{{year}}</h3>
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let student of dataSource" cdkDragLockAxis="y" cdkDrag>
+          <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
+          {{student.studentName}}
+          <a mat-button color="accent" routerLink="/students/view/:studentName">
+            <mat-icon aria-label="edit_icon">visibility</mat-icon>
+          </a>
+          <a mat-button color="primary" routerLink="/students/edit/:studentName">
+            <mat-icon aria-label="edit_icon">edit</mat-icon>
+          </a>
+          <button mat-button color="warn">
+            <mat-icon aria-label="delete_icon">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
 </div>

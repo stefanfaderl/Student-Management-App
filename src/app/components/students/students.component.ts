@@ -7,6 +7,7 @@ const students: student[] = [
   { studentName: "Hansi", ort: "Behamberg", lernjahr: 2, notizen: "Super" },
   { studentName: "Franz", ort: "Ernsthofen", lernjahr: 1, notizen: "Unpünktlich" },
   { studentName: "Sissi", ort: "Haidershofen", lernjahr: 3, notizen: "Gut" },
+  { studentName: "Bert", ort: "Behamberg", lernjahr: 2, notizen: "Super" },
 ];
 
 @Component({
@@ -16,18 +17,16 @@ const students: student[] = [
 })
 export class StudentsComponent implements OnInit {
   dataSource = [...students];
-  /* defaults for Desktop format */
-  cols: number = 2;
+  filteredStudents: string = '';
+
+  /* defaults for Handset breakpoint */
+  cols: number = 1;
   rowHeight: string = '';
 
-
-  /*     'Hansi Hinterseer',
-      'Schüler 2',
-      'Episode IV - A New Hope', */
   locations = [
-    'Behamberg',
-    'Haidershofen',
-    'Ernsthofen'
+    { locationName: 'Behamberg' },
+    { locationName: 'Haidershofen' },
+    { locationName: 'Ernsthofen' },
   ];
 
   learningYear = [
@@ -47,25 +46,25 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.breakpointObserver.observe([
-      Breakpoints.HandsetPortrait,
-      Breakpoints.HandsetLandscape,
-      Breakpoints.TabletPortrait
+      Breakpoints.XSmall, // (max-width: 599.98px)
+      Breakpoints.Small, // (min-width: 600px) and (max-width: 959.98px)
+      Breakpoints.Medium, // (min-width: 960px) and (max-width: 1279.98px)
     ])
       .subscribe(result => {
         this.cols = 2;
-        this.rowHeight = "70px";
+        this.rowHeight = "90px";
         const breakpoints = result.breakpoints;
-        if (breakpoints[Breakpoints.HandsetPortrait]) {
+        if (breakpoints[Breakpoints.XSmall]) {
           this.cols = 1;
           this.rowHeight = "100px";
         }
-        else if (breakpoints[Breakpoints.HandsetLandscape]) {
+        else if (breakpoints[Breakpoints.Small]) {
           this.cols = 1;
-          this.rowHeight = "110px";
+          this.rowHeight = "120px";
         }
-        else if (breakpoints[Breakpoints.TabletPortrait]) {
+        else if (breakpoints[Breakpoints.Medium]) {
           this.cols = 2;
-          this.rowHeight = "150px";
+          this.rowHeight = "70px";
         }
       });
   }

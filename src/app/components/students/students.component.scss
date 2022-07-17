@@ -13,7 +13,7 @@
   top: 5px;
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   text-align: center;
   span {
     font-size: 18px;
@@ -49,6 +49,7 @@
   background: white;
   border-radius: 4px;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .example-box {
@@ -86,6 +87,15 @@
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+@media screen and (min-width: 600px) and (max-width: 959.98px) {
+  .box-2 {
+    button {
+      margin: 0 auto;
+      width: 50%;
+    }
+  }
 }
 
 @media screen and (min-width: 960px) {

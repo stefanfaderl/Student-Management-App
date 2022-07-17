@@ -1,11 +1,10 @@
 <div class="grid-container">
-
   <mat-grid-list [cols]="cols" [rowHeight]="rowHeight">
     <mat-grid-tile>
       <div class="box-1">
         <span>Anzeigen nach:</span>
         <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-          <mat-button-toggle [checked]="true" (click)="showLocation = true">ORT</mat-button-toggle>
+          <mat-button-toggle [checked]="true" (click)="showLocation = true" ngDefaultControl>ORT</mat-button-toggle>
           <mat-button-toggle (click)="showLocation = false">LERNJAHR</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
@@ -23,22 +22,54 @@
   </mat-grid-list>
 
   <div *ngIf="showLocation; else showLearnigYear">
-    <div *ngFor="let location of locations">
-      <h3>{{location}}</h3>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let student of dataSource" cdkDragLockAxis="y" cdkDrag>
-          <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
-          {{student.studentName}}
-          <a mat-button color="accent" routerLink="/students/view/:studentName">
-            <mat-icon aria-label="edit_icon">visibility</mat-icon>
-          </a>
-          <a mat-button color="primary" routerLink="/students/edit/:studentName">
-            <mat-icon aria-label="edit_icon">edit</mat-icon>
-          </a>
-          <button mat-button color="warn">
-            <mat-icon aria-label="delete_icon">delete</mat-icon>
-          </button>
-        </div>
+    <h3>Behamberg</h3>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let student of dataSource | filter: 'Behamberg'" cdkDragLockAxis="y" cdkDrag>
+        <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
+        {{student.studentName}}
+        <a mat-button color="accent" routerLink="/students/view/:studentName">
+          <mat-icon aria-label="edit_icon">visibility</mat-icon>
+        </a>
+        <a mat-button color="primary" routerLink="/students/edit/:studentName">
+          <mat-icon aria-label="edit_icon">edit</mat-icon>
+        </a>
+        <button mat-button color="warn">
+          <mat-icon aria-label="delete_icon">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <h3>Ernsthofen</h3>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let student of dataSource | filter: 'Ernsthofen'" cdkDragLockAxis="y" cdkDrag>
+        <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
+        {{student.studentName}}
+        <a mat-button color="accent" routerLink="/students/view/:studentName">
+          <mat-icon aria-label="edit_icon">visibility</mat-icon>
+        </a>
+        <a mat-button color="primary" routerLink="/students/edit/:studentName">
+          <mat-icon aria-label="edit_icon">edit</mat-icon>
+        </a>
+        <button mat-button color="warn">
+          <mat-icon aria-label="delete_icon">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <h3>Haidershofen</h3>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let student of dataSource | filter: 'Haidershofen'" cdkDragLockAxis="y" cdkDrag>
+        <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
+        {{student.studentName}}
+        <a mat-button color="accent" routerLink="/students/view/:studentName">
+          <mat-icon aria-label="edit_icon">visibility</mat-icon>
+        </a>
+        <a mat-button color="primary" routerLink="/students/edit/:studentName">
+          <mat-icon aria-label="edit_icon">edit</mat-icon>
+        </a>
+        <button mat-button color="warn">
+          <mat-icon aria-label="delete_icon">delete</mat-icon>
+        </button>
       </div>
     </div>
   </div>

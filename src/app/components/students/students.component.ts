@@ -4,10 +4,11 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { student } from 'src/app/shared/models/Student';
 
 const students: student[] = [
-  { studentName: "Hansi", ort: "Behamberg", lernjahr: 2, notizen: "Super" },
-  { studentName: "Franz", ort: "Ernsthofen", lernjahr: 1, notizen: "Unpünktlich" },
-  { studentName: "Sissi", ort: "Haidershofen", lernjahr: 3, notizen: "Gut" },
-  { studentName: "Bert", ort: "Behamberg", lernjahr: 2, notizen: "Super" },
+  { studentName: "Hansi", studentLocation: "Behamberg", learningYear: 2, studentNotes: "Super" },
+  { studentName: "Franz", studentLocation: "Ernsthofen", learningYear: 1, studentNotes: "Unpünktlich" },
+  { studentName: "Sissi", studentLocation: "Haidershofen", learningYear: 3, studentNotes: "Gut" },
+  { studentName: "Bert", studentLocation: "Behamberg", learningYear: 4, studentNotes: "Super" },
+  { studentName: "Marie", studentLocation: "Behamberg", learningYear: 2, studentNotes: "Super" },
 ];
 
 @Component({
@@ -24,16 +25,12 @@ export class StudentsComponent implements OnInit {
   rowHeight: string = '';
 
   locations = [
-    { locationName: 'Behamberg' },
-    { locationName: 'Haidershofen' },
-    { locationName: 'Ernsthofen' },
+    'Behamberg', 'Haidershofen', 'Ernsthofen'
   ];
 
   learningYear = [
-    '1. Lernjahr',
-    '2. Lernjahr',
-    '3. Lernjahr',
-  ]
+    1, 2, 3, 4, 5, 6, 7, 8
+  ];
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.dataSource, event.previousIndex, event.currentIndex);

@@ -1,7 +1,7 @@
 export interface student {
   studentName: string;
-  lernjahr: number;
-  ort: string;
-  notizen: string;
+  learningYear: number;
+  studentLocation: string;
+  studentNotes: string;
   pdf?: any;
 }

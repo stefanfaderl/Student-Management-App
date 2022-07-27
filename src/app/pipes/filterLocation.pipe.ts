@@ -7,11 +7,6 @@ import { student } from '../shared/models/Student';
 export class FilterLocationPipe implements PipeTransform {
 
   transform(value: student[], locationName: string): student[] {
-
-    if (value.length === 0) {
-      return value;
-    }
-
     const resultArray = [];
     for (const key in value) {
       if (value[key].studentLocation === locationName) {

@@ -23,7 +23,6 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
-import { TableComponent } from './components/table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -44,7 +43,6 @@ import { FilterYearPipe } from './pipes/filter-year.pipe';
     PageNotFoundComponent,
     SidebarComponent,
     ProfilComponent,
-    TableComponent,
     FilterLocationPipe,
     FilterYearPipe
   ],

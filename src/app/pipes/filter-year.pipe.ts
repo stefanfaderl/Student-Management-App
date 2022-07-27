@@ -6,11 +6,6 @@ import { student } from '../shared/models/Student';
 })
 export class FilterYearPipe implements PipeTransform {
   transform(value: student[], currentYear: number): student[] {
-
-    if (value.length === 0) {
-      return value;
-    }
-
     const resultArray = [];
     for (const key in value) {
       if (value[key].learningYear === currentYear) {

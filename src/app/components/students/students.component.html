@@ -1,30 +1,30 @@
-<div class="grid-container">
-  <mat-grid-list [cols]="cols" [rowHeight]="rowHeight">
-    <mat-grid-tile>
-      <div class="box-1">
-        <span>Anzeigen nach:</span>
-        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-          <mat-button-toggle [checked]="true" (click)="showLocation = true" ngDefaultControl>ORT</mat-button-toggle>
-          <mat-button-toggle (click)="showLocation = false">LERNJAHR</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-    </mat-grid-tile>
+<mat-grid-list [cols]="cols" [rowHeight]="rowHeight">
+  <mat-grid-tile>
+    <div class="box-1">
+      <span>Anzeigen nach:</span>
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle [checked]="true" (click)="showLocation = true" ngDefaultControl>ORT</mat-button-toggle>
+        <mat-button-toggle (click)="showLocation = false">LERNJAHR</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </mat-grid-tile>
 
-    <mat-grid-tile>
-      <div class="box-2">
-        <span>Schüler hinzufügen:</span>
-        <button mat-raised-button color="primary" routerLink="/students/add">
-          <mat-icon aria-label="edit_icon">add</mat-icon>
-          NEU
-        </button>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <mat-grid-tile>
+    <div class="box-2">
+      <span>Schüler hinzufügen:</span>
+      <button mat-raised-button color="primary" routerLink="/students/add">
+        <mat-icon aria-label="edit_icon">add</mat-icon>
+        NEU
+      </button>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
-  <div *ngIf="showLocation; else showLearnigYear">
-    <article *ngFor="let location of locations">
+<div *ngIf="dataSource.length > 0; else noDataAvailable">
+  <div *ngIf="showLocation" class="table-flex-container">
+    <article *ngFor="let location of locations" class="example-container">
       <h3>{{ location }}</h3>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="dataSource.length > 0">
         <div class="example-box" *ngFor="let student of dataSource | filterLocation: location" cdkDragLockAxis="y"
           cdkDrag>
           <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
@@ -43,9 +43,9 @@
     </article>
   </div>
 
-  <ng-template #showLearnigYear>
+  <div *ngIf="!showLocation;">
     <article *ngFor="let year of learningYear">
-      <h3>{{ year }}</h3>
+      <h3>{{ year }}. Lernjahr</h3>
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let student of dataSource | filterYear: year" cdkDragLockAxis="y" cdkDrag>
           <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
@@ -62,5 +62,9 @@
         </div>
       </div>
     </article>
-  </ng-template>
+  </div>
 </div>
+
+<ng-template #noDataAvailable>
+  <p>Es wurden noch keine Schüler angelegt!</p>
+</ng-template>

@@ -4,11 +4,11 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { student } from 'src/app/shared/models/Student';
 
 const students: student[] = [
-  { studentName: "Hansi", studentLocation: "Behamberg", learningYear: 2, studentNotes: "Super" },
-  { studentName: "Franz", studentLocation: "Ernsthofen", learningYear: 1, studentNotes: "Unpünktlich" },
-  { studentName: "Sissi", studentLocation: "Haidershofen", learningYear: 3, studentNotes: "Gut" },
-  { studentName: "Bert", studentLocation: "Behamberg", learningYear: 4, studentNotes: "Super" },
-  { studentName: "Marie", studentLocation: "Behamberg", learningYear: 2, studentNotes: "Super" },
+    { studentName: "Hansi", studentLocation: "Behamberg", learningYear: 2, studentNotes: "Super" },
+    { studentName: "Franz", studentLocation: "Ernsthofen", learningYear: 1, studentNotes: "Unpünktlich" },
+    { studentName: "Sissi", studentLocation: "Haidershofen", learningYear: 3, studentNotes: "Gut" },
+    { studentName: "Bert", studentLocation: "Behamberg", learningYear: 4, studentNotes: "Super" },
+    { studentName: "Marie", studentLocation: "Behamberg", learningYear: 2, studentNotes: "Super" },
 ];
 
 @Component({
@@ -37,6 +37,7 @@ export class StudentsComponent implements OnInit {
   }
 
   showLocation: boolean = true;
+
   constructor(
     private breakpointObserver: BreakpointObserver,
   ) { }

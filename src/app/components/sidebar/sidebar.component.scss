@@ -1,3 +1,7 @@
+.grid-container {
+  margin: 20px;
+}
+
 .sidenav-container {
   height: 100%;
 }
@@ -30,4 +34,10 @@
 
 a {
   cursor: pointer;
+}
+
+@media screen and (min-width: 1280px) {
+  .grid-container {
+    margin: 20px 50px;
+  }
 }

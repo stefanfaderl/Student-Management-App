@@ -125,19 +125,10 @@
     }
   }
 
-  .table-flex-container {
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-  }
   .example-container {
-    margin-top: 20px;
-    width: 300px;
-  }
-}
-
-@media screen and (min-width: 1400px) {
-  .example-container {
-    width: 400px;
+    width: 380px;
+    max-width: 100%;
+    margin: 25px 25px 25px 0;
+    vertical-align: top;
   }
 }

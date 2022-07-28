@@ -21,10 +21,10 @@
 </mat-grid-list>
 
 <div *ngIf="dataSource.length > 0; else noDataAvailable">
-  <div *ngIf="showLocation" class="table-flex-container">
+  <div *ngIf="showLocation">
     <article *ngFor="let location of locations" class="example-container">
       <h3>{{ location }}</h3>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="dataSource.length > 0">
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let student of dataSource | filterLocation: location" cdkDragLockAxis="y"
           cdkDrag>
           <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
@@ -44,7 +44,7 @@
   </div>
 
   <div *ngIf="!showLocation;">
-    <article *ngFor="let year of learningYear">
+    <article *ngFor="let year of learningYear" class="example-container">
       <h3>{{ year }}. Lernjahr</h3>
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let student of dataSource | filterYear: year" cdkDragLockAxis="y" cdkDrag>

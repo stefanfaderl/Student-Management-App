@@ -31,6 +31,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilterLocationPipe } from './pipes/filterLocation.pipe';
 import { FilterYearPipe } from './pipes/filter-year.pipe';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { FilterYearPipe } from './pipes/filter-year.pipe';
     MatSortModule,
     MatButtonToggleModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSlideToggleModule
 
   ],
   providers: [],

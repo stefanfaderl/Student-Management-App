@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { student } from '../shared/models/Student';
+import { Student } from '../shared/models/Student';
 
 @Pipe({
   name: 'filterLocation'
 })
 export class FilterLocationPipe implements PipeTransform {
 
-  transform(value: student[], locationName: string): student[] {
+  transform(value: Student[], locationName: string): Student[] {
     const resultArray = [];
     for (const key in value) {
       if (value[key].studentLocation === locationName) {

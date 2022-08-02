@@ -1,1 +1,6 @@
-/*# sourceMappingURL=view-student.component.css.map */
+@media screen and (min-width: 960px) {
+  .shipping-card {
+    max-width: 500px;
+    margin: 40px auto;
+  }
+}/*# sourceMappingURL=view-student.component.css.map */

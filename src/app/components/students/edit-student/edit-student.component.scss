@@ -1,0 +1,48 @@
+.full-width {
+  width: 100%;
+}
+
+.shipping-card {
+  min-width: 120px;
+  margin: 20px auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+.margin-r {
+  margin-right: 10px;
+}
+
+.file-name {
+  margin: 5px;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  button,
+  a {
+    margin: 0 8px 10px 8px !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .shipping-card {
+    max-width: 800px;
+    margin: 40px auto;
+  }
+}

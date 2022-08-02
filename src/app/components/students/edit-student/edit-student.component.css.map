@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"edit-student.component.css"}
+{"version":3,"sourceRoot":"","sources":["edit-student.component.scss"],"names":[],"mappings":"AAAA;EACE;;;AAGF;EACE;EACA;;;AAGF;EACE;EACA;EACA;;;AAGF;EACE;EACA;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;EACA;EACA;;AACA;AAAA;EAEE;;;AAIJ;EACE;IACE;IACA","file":"edit-student.component.css"}

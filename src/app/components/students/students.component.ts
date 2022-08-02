@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { student } from 'src/app/shared/models/Student';
+import { Student } from 'src/app/shared/models/Student';
 
-const students: student[] = [
+const students: Student[] = [
   { studentName: "Hansi", studentLocation: "Behamberg", learningYear: 2, studentNotes: "Super" },
   { studentName: "Franz", studentLocation: "Ernsthofen", learningYear: 1, studentNotes: "Unpünktlich" },
   { studentName: "Sissi", studentLocation: "Haidershofen", learningYear: 3, studentNotes: "Gut" },

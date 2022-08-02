@@ -1,1 +1,90 @@
-<p>edit-student works!</p>
+<!-- Edit Contact Form -->
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Schüler editieren</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Vorname" formControlName="firstName">
+            <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
+              Vorname ist <strong>erforderlich</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nachname" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Nachname ist <strong>erforderlich</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Ort" formControlName="city">
+            <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
+              Ort ist <strong>erforderlich</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Lernjahr</mat-label>
+            <mat-select name="learningYear" formControlName="year">
+              <mat-option *ngFor="let year of learningYear" [value]="year.learningYear">
+                {{year.learningYear}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addressForm.controls['year'].hasError('required')">
+              Lernjahr ist <strong>erforderlich</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Notizen</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <!-- <input type="file" (change)="onFileSelected($event)"> -->
+          <button type="button" mat-stroked-button (click)="fileInput.click()">Datei auswählen</button>
+          <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p class="file-name">{{selectedFile?.name}}</p>
+          <button type="button" mat-button color="accent">
+            <mat-icon class="margin-r">cloud_upload</mat-icon>
+            <span>Hochladen</span>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-stroked-button color="primary" type="button" routerLink="">Zurück</a>
+      <button mat-stroked-button color="warn" type="reset">Eingabe löschen</button>
+      <button mat-raised-button color="primary" type="submit" value="Update">Speichern</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

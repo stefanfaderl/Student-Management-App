@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { LearningYear } from 'src/app/shared/models/LearningYear';
 
 @Component({
@@ -12,7 +13,8 @@ export class AddStudentComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private dataStorageService: DataStorageService
   ) { }
 
   selectedFile: any = null;
@@ -52,6 +54,6 @@ export class AddStudentComponent implements OnInit {
   }
 
   onSubmit(): void {
-    alert('Thanks!');
+    this.dataStorageService.storeStudents();
   }
 }

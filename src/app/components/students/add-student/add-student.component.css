@@ -30,6 +30,16 @@
   margin: 5px;
 }
 
+.mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.mat-card-actions button,
+.mat-card-actions a {
+  margin: 0 8px 10px 8px !important;
+}
+
 @media screen and (min-width: 1280px) {
   .shipping-card {
     max-width: 800px;

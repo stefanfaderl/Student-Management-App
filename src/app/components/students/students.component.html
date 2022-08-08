@@ -20,16 +20,16 @@
   </mat-grid-tile>
 </mat-grid-list>
 
-<div *ngIf="dataSource.length > 0; else noDataAvailable">
+<div *ngIf="students.length > 0; else noDataAvailable">
   <div *ngIf="showLocation">
     <article *ngFor="let location of locations" class="example-container">
       <h3>{{ location }}</h3>
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let student of dataSource | filterLocation: location" cdkDragLockAxis="y"
+        <div class="example-box" *ngFor="let student of students | filterLocation: location" cdkDragLockAxis="y"
           cdkDrag>
           <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
           {{student.studentName}}
-          <a mat-button color="accent" routerLink="/students/view/:studentName">
+          <a mat-button color="accent" routerLink="view/{{student.studentName}}" routerLinkActive="active">
             <mat-icon aria-label="edit_icon">visibility</mat-icon>
           </a>
           <a mat-button color="primary" routerLink="/students/edit/:studentName">
@@ -47,7 +47,7 @@
     <article *ngFor="let year of learningYear" class="example-container">
       <h3>{{ year }}. Lernjahr</h3>
       <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let student of dataSource | filterYear: year" cdkDragLockAxis="y" cdkDrag>
+        <div class="example-box" *ngFor="let student of students | filterYear: year" cdkDragLockAxis="y" cdkDrag>
           <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
           {{student.studentName}}
           <a mat-button color="accent" routerLink="/students/view/:studentName">

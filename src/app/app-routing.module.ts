@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'students', component: StudentsComponent },
   { path: 'students/add', component: AddStudentComponent },
   { path: 'students/edit/:studentName', component: EditStudentComponent },
-  { path: 'students/view/:studentName', component: ViewStudentComponent },
+  { path: 'students/view/:name', component: ViewStudentComponent },
   { path: 'to-dos', component: ToDosComponent },
   { path: 'my-profile', component: ProfilComponent },
   { path: '**', component: PageNotFoundComponent }

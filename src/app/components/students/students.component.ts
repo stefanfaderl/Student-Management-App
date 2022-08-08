@@ -1,48 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Student } from 'src/app/shared/models/Student';
-
-const students: Student[] = [
-  { studentName: "Hansi", studentLocation: "Behamberg", learningYear: 2, studentNotes: "Super" },
-  { studentName: "Franz", studentLocation: "Ernsthofen", learningYear: 1, studentNotes: "Unpünktlich" },
-  { studentName: "Sissi", studentLocation: "Haidershofen", learningYear: 3, studentNotes: "Gut" },
-  { studentName: "Bert", studentLocation: "Behamberg", learningYear: 4, studentNotes: "Super" },
-  { studentName: "Marie", studentLocation: "Behamberg", learningYear: 2, studentNotes: "Super" },
-];
+import { StudentService } from 'src/app/services/student.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss']
+  styleUrls: ['./students.component.scss'],
+  providers: [StudentService] // all child components of students will share the same instance of this service
 })
+
 export class StudentsComponent implements OnInit {
-  dataSource = [...students];
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private studentService: StudentService
+  ) { }
+
   filteredStudents: string = '';
+  students: Student[] = [];
+  subscribtion: Subscription = new Subscription;
+  showLocation: boolean = true;
 
   /* defaults for Handset breakpoint */
   cols: number = 1;
   rowHeight: string = '';
 
   locations = [
-    'Behamberg', 'Haidershofen', 'Ernsthofen'
+    'Behamberg',
+    'Haidershofen',
+    'Ernsthofen'
   ];
 
   learningYear = [
-    1, 2, 3, 4, 5, 6, 7, 8
+    1, 2, 3, 4,
+    5, 6, 7, 8
   ];
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.dataSource, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.students, event.previousIndex, event.currentIndex);
   }
 
-  showLocation: boolean = true;
-
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-  ) { }
-
   ngOnInit(): void {
+    this.subscribtion = this.studentService.studentsChanged.subscribe(
+      (students: Student[]) => {
+        this.students = students;
+      }
+    )
+    this.students = this.studentService.getStudents(); // get copy students from array students
+
     this.breakpointObserver.observe([
       Breakpoints.XSmall, // (max-width: 599.98px)
       Breakpoints.Small, // (min-width: 600px) and (max-width: 959.98px)
@@ -65,5 +73,9 @@ export class StudentsComponent implements OnInit {
           this.rowHeight = "70px";
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.subscribtion.unsubscribe();
   }
 }

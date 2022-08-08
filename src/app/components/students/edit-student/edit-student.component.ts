@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+import { StudentService } from 'src/app/services/student.service';
 import { LearningYear } from 'src/app/shared/models/LearningYear';
+import { Student } from 'src/app/shared/models/Student';
 
 @Component({
   selector: 'app-edit-student',
@@ -9,27 +12,50 @@ import { LearningYear } from 'src/app/shared/models/LearningYear';
   styleUrls: ['./edit-student.component.scss']
 })
 export class EditStudentComponent implements OnInit {
+  student!: Student;
+  studentName!: string;
+  studentForm!: FormGroup;
+  selectedFile: any = null;
 
   constructor(
-    private fb: FormBuilder,
-    private http: HttpClient
+    private route: ActivatedRoute,
+    private studentService: StudentService,
   ) { }
 
   ngOnInit(): void {
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.studentName = params['name'];
+          this.student = this.studentService.getStudent(this.studentName);
+          this.initForm();
+        }
+      )
   }
 
-  selectedFile: any = null;
+  private initForm() {
+    let studentName: string = '';
+    let city: string = '';
+    let year: number;
+    let notes: string | undefined;
+
+    const student = this.studentService.getStudent(this.studentName);
+    studentName = student.studentName;
+    city = student.studentLocation;
+    year = student.learningYear;
+    notes = student.studentNotes;
+
+    this.studentForm = new FormGroup({
+      'name': new FormControl(studentName, Validators.required),
+      'city': new FormControl(city, Validators.required),
+      'year': new FormControl(year, Validators.required),
+      'notes': new FormControl(notes)
+    })
+  }
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0] ?? null;
   }
-
-  addressForm = this.fb.group({
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    city: [null, Validators.required],
-    year: [null, Validators.required]
-  });
 
   learningYear: LearningYear[] = [
     { learningYear: 1 },
@@ -45,7 +71,7 @@ export class EditStudentComponent implements OnInit {
   ];
 
   onSubmit(): void {
-    alert('Thanks!');
+    console.log(this.studentForm);
   }
 
 }

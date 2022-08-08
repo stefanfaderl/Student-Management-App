@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'students', pathMatch: 'full' },
   { path: 'students', component: StudentsComponent },
   { path: 'students/add', component: AddStudentComponent },
-  { path: 'students/edit/:studentName', component: EditStudentComponent },
+  { path: 'students/edit/:name', component: EditStudentComponent },
   { path: 'students/view/:name', component: ViewStudentComponent },
   { path: 'to-dos', component: ToDosComponent },
   { path: 'my-profile', component: ProfilComponent },

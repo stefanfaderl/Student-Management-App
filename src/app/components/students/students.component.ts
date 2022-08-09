@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Student } from 'src/app/shared/models/Student';
@@ -8,20 +8,18 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss'],
-  providers: [StudentService] // all child components of students will share the same instance of this service
+  styleUrls: ['./students.component.scss']
 })
 
-export class StudentsComponent implements OnInit {
+export class StudentsComponent implements OnInit, OnDestroy {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private studentService: StudentService
   ) { }
 
-  filteredStudents: string = '';
-  students: Student[] = [];
-  subscribtion: Subscription = new Subscription;
+  subscription!: Subscription;
+  students!: Student[];
   showLocation: boolean = true;
 
   /* defaults for Handset breakpoint */
@@ -44,11 +42,13 @@ export class StudentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscribtion = this.studentService.studentsChanged.subscribe(
-      (students: Student[]) => {
-        this.students = students;
-      }
-    )
+    this.subscription = this.studentService.studentsChanged
+      .subscribe(
+        (students: Student[]) => {
+          this.students = students;
+        }
+      );
+
     this.students = this.studentService.getStudents(); // get copy students from array students
 
     this.breakpointObserver.observe([
@@ -75,7 +75,11 @@ export class StudentsComponent implements OnInit {
       });
   }
 
-  ngOnDestroy() {
-    this.subscribtion.unsubscribe();
+  public onDeleteStudent(studentName: string) {
+    this.studentService.deleteStudent(studentName);
+  }
+
+  ngOnDestroy(): void { // dont cause any memory leaks
+    this.subscription.unsubscribe();
   }
 }

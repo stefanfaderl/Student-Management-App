@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from 'src/app/services/student.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { LearningYear } from 'src/app/shared/models/LearningYear';
+import { Location } from 'src/app/shared/models/Location';
 import { Student } from 'src/app/shared/models/Student';
 
 
@@ -20,6 +21,7 @@ export class AddStudentComponent implements OnInit {
   selectedFile: any = null;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private studentService: StudentService,
     private dataStorageService: DataStorageService
@@ -48,16 +50,25 @@ export class AddStudentComponent implements OnInit {
     { learningYear: 10 },
   ];
 
+  locations: Location[] = [
+    { 'cityName': 'Haidershofen' },
+    { 'cityName': 'Behamberg' },
+    { 'cityName': 'Ernsthofen' },
+  ]
+
+
   ngOnInit(): void {
     this.studentForm = new FormGroup({
-      'name': new FormControl(null, Validators.required),
-      'city': new FormControl(null, Validators.required),
-      'year': new FormControl(null, Validators.required),
+      'studentName': new FormControl(null, Validators.required),
+      'learningYear': new FormControl(null, Validators.required),
+      'studentLocation': new FormControl(null, Validators.required),
       'notes': new FormControl(null)
     })
   }
 
   onSubmit(): void {
-    this.dataStorageService.storeStudents();
+    /* this.dataStorageService.storeStudents(); */
+    this.studentService.addStudent(this.studentForm.value);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

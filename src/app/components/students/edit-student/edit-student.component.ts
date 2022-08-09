@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { StudentService } from 'src/app/services/student.service';
 import { LearningYear } from 'src/app/shared/models/LearningYear';
 import { Student } from 'src/app/shared/models/Student';
+import { Location } from 'src/app/shared/models/Location';
 
 @Component({
   selector: 'app-edit-student',
@@ -18,6 +19,7 @@ export class EditStudentComponent implements OnInit {
   selectedFile: any = null;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private studentService: StudentService,
   ) { }
@@ -70,8 +72,21 @@ export class EditStudentComponent implements OnInit {
     { learningYear: 10 },
   ];
 
-  onSubmit(): void {
-    console.log(this.studentForm);
-  }
+  locations: Location[] = [
+    { 'cityName': 'Haidershofen' },
+    { 'cityName': 'Behamberg' },
+    { 'cityName': 'Ernsthofen' },
+  ]
 
+  onSubmit(): void {
+    const newStudent = new Student(
+      this.studentForm.value['name'],
+      this.studentForm.value['year'],
+      this.studentForm.value['city'],
+      this.studentForm.value['notes']
+    );
+    /* console.log(this.studentForm); */
+    this.studentService.updateStudent(this.studentName, newStudent)
+    this.router.navigate(['../../'], { relativeTo: this.route });
+  }
 }

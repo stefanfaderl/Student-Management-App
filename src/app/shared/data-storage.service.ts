@@ -9,12 +9,12 @@ export class DataStorageService {
     private http: HttpClient,
     private studentService: StudentService
   ) { }
-  storeStudents() {
+/*   storeStudents() {
     const student = this.studentService.getStudents();
     this.http.put('https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json', student)
       .subscribe(response => {
         console.log(response);
       }) // put request, any data would be overwritten
-  }
+  } */
 }
 

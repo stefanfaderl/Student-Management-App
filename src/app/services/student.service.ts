@@ -6,6 +6,7 @@ import { Student } from '../shared/models/Student';
   providedIn: 'root'
 })
 export class StudentService {
+
   studentsChanged = new Subject<Student[]>();
 
   private students: Student[] = [
@@ -52,8 +53,22 @@ export class StudentService {
     return this.students[index];
   }
 
-  public createStudent() {
+  public addStudent(student: Student) {
+    this.students.push(student);
+    this.studentsChanged.next(this.students.slice());
+    console.log(this.students);
   }
 
+  public updateStudent(studentName: string, newStudent: Student) {
+    const index = this.students.map(object => object.studentName).indexOf(studentName);
+    this.students[index] = newStudent;
+    this.studentsChanged.next(this.students.slice());
+    console.log(this.students);
+  }
 
+  public deleteStudent(studentName: string) {
+    const index = this.students.map(object => object.studentName).indexOf(studentName);
+    this.students.splice(index, 1);
+    this.studentsChanged.next(this.students.slice());
+  }
 }

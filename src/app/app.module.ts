@@ -16,6 +16,7 @@ import { ViewStudentComponent } from './components/students/view-student/view-st
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { StudentService } from './services/student.service';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -77,9 +78,10 @@ import { MatRadioModule } from '@angular/material/radio';
     MatInputModule,
     MatSelectModule,
     MatRadioModule
-
   ],
-  providers: [],
+  providers: [
+    StudentService // service in app module make sure that I have 1 instance of the service all the time available as long as the app is running
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

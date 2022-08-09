@@ -9,8 +9,8 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput formControlName="name" placeholder="Name">
-            <mat-error *ngIf="studentForm.controls['name'].hasError('required')">
+            <input matInput formControlName="studentName" placeholder="Name">
+            <mat-error *ngIf="studentForm.controls['studentName'].hasError('required')">
               Vorname ist <strong>erforderlich</strong>
             </mat-error>
           </mat-form-field>
@@ -19,9 +19,14 @@
 
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput formControlName="city" placeholder="Ort">
-            <mat-error *ngIf="studentForm.controls['city'].hasError('required')">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Ort</mat-label>
+            <mat-select name="studentLocation" formControlName="studentLocation">
+              <mat-option *ngFor="let location of locations" [value]="location.cityName">
+                {{ location.cityName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="studentForm.controls['studentLocation'].hasError('required')">
               Ort ist <strong>erforderlich</strong>
             </mat-error>
           </mat-form-field>
@@ -32,12 +37,12 @@
         <div class="col">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Lernjahr</mat-label>
-            <mat-select name="learningYear" formControlName="year">
+            <mat-select name="learningYear" formControlName="learningYear">
               <mat-option *ngFor="let year of learningYear" [value]="year.learningYear">
                 {{year.learningYear}}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="studentForm.controls['year'].hasError('required')">
+            <mat-error *ngIf="studentForm.controls['learningYear'].hasError('required')">
               Lernjahr ist <strong>erforderlich</strong>
             </mat-error>
           </mat-form-field>

@@ -7,13 +7,14 @@ import { EditStudentComponent } from './components/students/edit-student/edit-st
 import { StudentsComponent } from './components/students/students.component';
 import { ViewStudentComponent } from './components/students/view-student/view-student.component';
 import { ToDosComponent } from './components/to-dos/to-dos.component';
+import { StudentResolverService } from './services/student-resolver.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'students', pathMatch: 'full' },
   { path: 'students', component: StudentsComponent },
   { path: 'students/add', component: AddStudentComponent },
-  { path: 'students/edit/:name', component: EditStudentComponent },
-  { path: 'students/view/:name', component: ViewStudentComponent },
+  { path: 'students/edit/:name', component: EditStudentComponent, resolve: [StudentResolverService] },
+  { path: 'students/view/:name', component: ViewStudentComponent, resolve: [StudentResolverService] },
   { path: 'to-dos', component: ToDosComponent },
   { path: 'my-profile', component: ProfilComponent },
   { path: '**', component: PageNotFoundComponent }

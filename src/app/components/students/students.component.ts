@@ -4,6 +4,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Student } from 'src/app/shared/models/Student';
 import { StudentService } from 'src/app/services/student.service';
 import { Subscription } from 'rxjs';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
   selector: 'app-students',
@@ -15,7 +16,8 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private dataStorage: DataStorageService
   ) { }
 
   subscription!: Subscription;
@@ -42,6 +44,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     this.subscription = this.studentService.studentsChanged
       .subscribe(
         (students: Student[]) => {
@@ -77,6 +80,14 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   public onDeleteStudent(studentName: string) {
     this.studentService.deleteStudent(studentName);
+  }
+
+  public onFetchData() {
+    this.dataStorage.fetchStudents().subscribe();
+  }
+
+  public onSaveData() {
+    this.dataStorage.storeStudents();
   }
 
   ngOnDestroy(): void { // dont cause any memory leaks

@@ -13,6 +13,7 @@ import { Location } from 'src/app/shared/models/Location';
   styleUrls: ['./edit-student.component.scss']
 })
 export class EditStudentComponent implements OnInit {
+
   student!: Student;
   studentName!: string;
   studentForm!: FormGroup;
@@ -37,22 +38,22 @@ export class EditStudentComponent implements OnInit {
 
   private initForm() {
     let studentName: string = '';
-    let city: string = '';
-    let year: number;
-    let notes: string | undefined;
+    let studentLocation: string = '';
+    let learningYear: number;
+    let studentNotes: string | undefined;
 
     const student = this.studentService.getStudent(this.studentName);
     studentName = student.studentName;
-    city = student.studentLocation;
-    year = student.learningYear;
-    notes = student.studentNotes;
+    studentLocation = student.studentLocation;
+    learningYear = student.learningYear;
+    studentNotes = student.studentNotes;
 
-    this.studentForm = new FormGroup({
-      'name': new FormControl(studentName, Validators.required),
-      'city': new FormControl(city, Validators.required),
-      'year': new FormControl(year, Validators.required),
-      'notes': new FormControl(notes)
-    })
+    this.studentForm = new FormGroup({ // properties should be the same as the model student
+      'studentName': new FormControl(studentName, Validators.required),
+      'studentLocation': new FormControl(studentLocation, Validators.required),
+      'learningYear': new FormControl(learningYear, Validators.required),
+      'studentNotes': new FormControl(studentNotes)
+    });
   }
 
   onFileSelected(event: any): void {
@@ -79,13 +80,12 @@ export class EditStudentComponent implements OnInit {
   ]
 
   onSubmit(): void {
-    const newStudent = new Student(
-      this.studentForm.value['name'],
-      this.studentForm.value['year'],
-      this.studentForm.value['city'],
-      this.studentForm.value['notes']
+    let newStudent = new Student( // also order should be the same as in the class
+      this.studentForm.value['studentName'],
+      this.studentForm.value['studentLocation'],
+      this.studentForm.value['learningYear'],
+      this.studentForm.value['studentNotes']
     );
-    /* console.log(this.studentForm); */
     this.studentService.updateStudent(this.studentName, newStudent)
     this.router.navigate(['../../'], { relativeTo: this.route });
   }

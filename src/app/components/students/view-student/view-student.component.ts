@@ -8,9 +8,12 @@ import { Student } from 'src/app/shared/models/Student';
   templateUrl: './view-student.component.html',
   styleUrls: ['./view-student.component.scss']
 })
+
 export class ViewStudentComponent implements OnInit {
+
   student!: Student;
   studentName!: string;
+
   constructor(
     private studentService: StudentService,
     private route: ActivatedRoute

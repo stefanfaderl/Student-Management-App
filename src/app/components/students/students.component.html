@@ -29,7 +29,7 @@
           cdkDrag>
           <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
           {{student.studentName}}
-          <a mat-button color="accent" routerLink="view/{{student.studentName}}" routerLinkActive="active">
+          <a mat-button color="accent" routerLink="view/{{student.studentName}}">
             <mat-icon aria-label="edit_icon">visibility</mat-icon>
           </a>
           <a mat-button color="primary" routerLink="edit/{{student.studentName}}">
@@ -50,13 +50,13 @@
         <div class="example-box" *ngFor="let student of students | filterYear: year" cdkDragLockAxis="y" cdkDrag>
           <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
           {{student.studentName}}
-          <a mat-button color="accent" routerLink="/students/view/:studentName">
+          <a mat-button color="accent" routerLink="view/{{student.studentName}}">
             <mat-icon aria-label="edit_icon">visibility</mat-icon>
           </a>
-          <a mat-button color="primary" routerLink="/students/edit/:studentName">
+          <a mat-button color="primary" routerLink="edit/{{student.studentName}}">
             <mat-icon aria-label="edit_icon">edit</mat-icon>
           </a>
-          <button mat-button color="warn">
+          <button mat-button color="warn" (click)="onDeleteStudent(student.studentName)">
             <mat-icon aria-label="delete_icon">delete</mat-icon>
           </button>
         </div>
@@ -68,3 +68,6 @@
 <ng-template #noDataAvailable>
   <p>Es wurden noch keine Schüler angelegt!</p>
 </ng-template>
+
+<button mat-raised-button color="primary" (click)="onFetchData()">FETCH STUDENTS</button>
+<button mat-raised-button color="warn" (click)="onSaveData()">STORE STUDENTS</button>

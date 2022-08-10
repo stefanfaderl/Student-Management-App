@@ -21,7 +21,7 @@
         <div class="col">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Ort</mat-label>
-            <mat-select name="studentLocation" formControlName="studentLocation">
+            <mat-select name="city" formControlName="studentLocation">
               <mat-option *ngFor="let location of locations" [value]="location.cityName">
                 {{ location.cityName }}
               </mat-option>
@@ -37,7 +37,7 @@
         <div class="col">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Lernjahr</mat-label>
-            <mat-select name="learningYear" formControlName="learningYear">
+            <mat-select name="year" formControlName="learningYear">
               <mat-option *ngFor="let year of learningYear" [value]="year.learningYear">
                 {{year.learningYear}}
               </mat-option>
@@ -53,7 +53,7 @@
         <div class="col">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Notizen</mat-label>
-            <textarea matInput formControlName="notes">
+            <textarea matInput formControlName="studentNotes">
             </textarea>
           </mat-form-field>
         </div>

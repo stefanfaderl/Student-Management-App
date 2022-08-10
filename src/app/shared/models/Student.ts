@@ -5,10 +5,10 @@ export class Student {
   public studentNotes?: string;
   public pdf?: any;
 
-  constructor(studentName: string, learningYear: number, studentLocation: string, studentNotes?: string, pdf?: any) {
+  constructor(studentName: string, studentLocation: string, learningYear: number, studentNotes?: string, pdf?: any) {
     this.studentName = studentName;
-    this.learningYear = learningYear;
     this.studentLocation = studentLocation;
+    this.learningYear = learningYear;
     this.studentNotes = studentNotes;
     this.pdf = pdf;
   }

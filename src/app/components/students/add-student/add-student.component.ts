@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,11 +22,10 @@ export class AddStudentComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private studentService: StudentService,
-    private dataStorageService: DataStorageService
+    private studentService: StudentService
   ) { }
 
-  onFileSelected(event: any): void {
+  public onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0] ?? null;
   }
 
@@ -58,16 +56,15 @@ export class AddStudentComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.studentForm = new FormGroup({
+    this.studentForm = new FormGroup({ // properties should be the same as the model student
       'studentName': new FormControl(null, Validators.required),
-      'learningYear': new FormControl(null, Validators.required),
       'studentLocation': new FormControl(null, Validators.required),
-      'notes': new FormControl(null)
-    })
+      'learningYear': new FormControl(null, Validators.required),
+      'studentNotes': new FormControl(null)
+    });
   }
 
-  onSubmit(): void {
-    /* this.dataStorageService.storeStudents(); */
+  public onSubmit(): void {
     this.studentService.addStudent(this.studentForm.value);
     this.router.navigate(['../'], { relativeTo: this.route });
   }

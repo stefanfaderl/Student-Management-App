@@ -1,7 +1,7 @@
 
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, tap } from "rxjs/operators";
+import { map, mergeMap, tap } from "rxjs/operators";
 import { StudentService } from "../services/student.service";
 import { Student } from "./models/Student";
 
@@ -14,25 +14,31 @@ export class DataStorageService {
     private studentService: StudentService
   ) { }
 
-  public storeStudents() {
-    const students = this.studentService.getStudents();
-    this.http
-      .put(
-        'https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json',
-        students
-      )
-      .subscribe(response => {
-      }) // post request for one student, put request for all students, any previous students data would be overwritten
+  public createAndStoreStudent(studentData: Student) {
+    return this.http.post<{ name: string }>('https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json', studentData)
+      .pipe(
+        mergeMap(() => this.fetchStudents()));
+    // post request for one student, put request for all students, any previous students data would be overwritten
   }
 
   public fetchStudents() {
     return this.http
-      .get<Student[]>('https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json')
+      .get<{ [key: string]: Student }>('https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json')
       .pipe(
-        tap(students => {
-          this.studentService.setStudents(students);
+        map(responseData => {
+          const studentsArray: Student[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              studentsArray.push({ ...responseData[key], id: key });
+            }
+          }
+          return studentsArray;
         })
       );
   }
-}
 
+  public deleteStudent(id: string) {
+    return this.http
+      .delete<{ [key: string]: Student }>(`https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${id}.json`);
+  }
+}

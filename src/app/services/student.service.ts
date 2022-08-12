@@ -47,7 +47,7 @@ export class StudentService {
 
   public setStudents(students: Student[]) { // overwrite students
     this.students = students;
-    this.studentsChanged.next(this.students.slice());
+    this.studentsChanged.next(this.students);
   }
 
   public getStudents() {
@@ -59,20 +59,9 @@ export class StudentService {
     return this.students[index];
   }
 
-  public addStudent(student: Student) {
-    this.students.push(student);
-    this.studentsChanged.next(this.students.slice());
-  }
-
   public updateStudent(studentName: string, newStudent: Student) {
     const index = this.students.map(object => object.studentName).indexOf(studentName);
     this.students[index] = newStudent;
-    this.studentsChanged.next(this.students.slice());
-  }
-
-  public deleteStudent(studentName: string) {
-    const index = this.students.map(object => object.studentName).indexOf(studentName);
-    this.students.splice(index, 1);
     this.studentsChanged.next(this.students.slice());
   }
 }

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,11 +19,14 @@ export class AddStudentComponent implements OnInit {
   studentName!: string;
   studentForm!: FormGroup;
   selectedFile: any = null;
+  error: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private studentService: StudentService
+    private dataStorage: DataStorageService,
+    private studentService: StudentService,
+    private http: HttpClient
   ) { }
 
   public onFileSelected(event: any): void {
@@ -64,8 +68,12 @@ export class AddStudentComponent implements OnInit {
     });
   }
 
-  public onSubmit(): void {
-    this.studentService.addStudent(this.studentForm.value);
+  public onCreateStudent(): void {
+    this.dataStorage.createAndStoreStudent(this.studentForm.value)
+      .subscribe(
+        students => this.studentService.setStudents(students),
+        error => this.error = error.statusText
+      )
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

@@ -14,15 +14,10 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 export class StudentsComponent implements OnInit, OnDestroy {
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private studentService: StudentService,
-    private dataStorage: DataStorageService
-  ) { }
-
   subscription!: Subscription;
-  students!: Student[];
+  students: Student[] = [];
   showLocation: boolean = true;
+  isFetching: boolean = false;
 
   /* defaults for Handset breakpoint */
   cols: number = 1;
@@ -39,11 +34,14 @@ export class StudentsComponent implements OnInit, OnDestroy {
     5, 6, 7, 8
   ];
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.students, event.previousIndex, event.currentIndex);
-  }
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private studentService: StudentService,
+    private dataStorage: DataStorageService
+  ) { }
 
   ngOnInit(): void {
+    this.onFetchStudents();
 
     this.subscription = this.studentService.studentsChanged
       .subscribe(
@@ -78,16 +76,27 @@ export class StudentsComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onDeleteStudent(studentName: string) {
-    this.studentService.deleteStudent(studentName);
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.students, event.previousIndex, event.currentIndex);
   }
 
-  public onFetchData() {
-    this.dataStorage.fetchStudents().subscribe();
+  public onDeleteStudent(studentName: string, id: any) {
+    if (confirm(
+      `Bist du dir sicher das du ${studentName} löschen willst?`
+    )) {
+      this.dataStorage.deleteStudent(id)
+        .subscribe(() => this.onFetchStudents());
+    }
   }
 
-  public onSaveData() {
-    this.dataStorage.storeStudents();
+  public onFetchStudents() {
+    this.isFetching = true;
+    this.dataStorage.fetchStudents()
+      .subscribe(students => {
+        this.isFetching = false;
+        this.studentService.setStudents(students);
+        this.students = students;
+      });
   }
 
   ngOnDestroy(): void { // dont cause any memory leaks

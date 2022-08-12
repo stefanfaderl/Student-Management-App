@@ -69,8 +69,23 @@
   </div>
 </div>
 
-<section *ngIf="isFetching">
+<section *ngIf="isFetching && !error">
   <h2>Loading...</h2>
 </section>
+
+<section *ngIf="error">
+  <mat-card class="error-card">
+    <mat-card-title-group>
+      <mat-card-title>Es ist ein Fehler aufgetreten!</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <p>{{ error }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button button mat-raised-button (click)="onHandleError()">Schließen</button>
+    </mat-card-actions>
+  </mat-card>
+</section>
+
 
 <button mat-raised-button color="primary" (click)="onFetchStudents()">FETCH STUDENTS</button>

@@ -44,3 +44,12 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.error-card {
+  color: white;
+  background-color: #f44336;
+  max-width: 400px;
+  margin-bottom: 8px;
+  padding: 20px !important;
+  line-height: 2.5em;
+}

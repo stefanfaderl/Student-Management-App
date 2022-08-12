@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 import { StudentService } from 'src/app/services/student.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { LearningYear } from 'src/app/shared/models/LearningYear';
@@ -19,7 +20,6 @@ export class AddStudentComponent implements OnInit {
   studentName!: string;
   studentForm!: FormGroup;
   selectedFile: any = null;
-  error: any;
 
   constructor(
     private router: Router,
@@ -72,8 +72,7 @@ export class AddStudentComponent implements OnInit {
     this.dataStorage.createAndStoreStudent(this.studentForm.value)
       .subscribe(
         students => this.studentService.setStudents(students),
-        error => this.error = error.statusText
-      )
+        () => catchError(this.studentService.handleError));
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

@@ -1,5 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { Student } from '../shared/models/Student';
 
 @Injectable({
@@ -63,5 +64,18 @@ export class StudentService {
     const index = this.students.map(object => object.studentName).indexOf(studentName);
     this.students[index] = newStudent;
     this.studentsChanged.next(this.students.slice());
+  }
+
+  public handleError(error: HttpErrorResponse) {
+    let errorMessage: string = '';
+
+    if (error.error instanceof ErrorEvent) {
+      // client Error
+      errorMessage = `CLIENT ERROR: ${error.name} ${error.status} ${error.statusText}`
+    } else {
+      // server Error
+      errorMessage = `SERVER ERROR: ${error.name} ${error.status} ${error.statusText}`;
+    }
+    return throwError(errorMessage);
   }
 }

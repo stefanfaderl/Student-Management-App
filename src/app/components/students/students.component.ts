@@ -5,6 +5,7 @@ import { Student } from 'src/app/shared/models/Student';
 import { StudentService } from 'src/app/services/student.service';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-students',
@@ -18,6 +19,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
   students: Student[] = [];
   showLocation: boolean = true;
   isFetching: boolean = false;
+  error: any;
 
   /* defaults for Handset breakpoint */
   cols: number = 1;
@@ -41,6 +43,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
     this.onFetchStudents();
 
     this.subscription = this.studentService.studentsChanged
@@ -96,7 +99,14 @@ export class StudentsComponent implements OnInit, OnDestroy {
         this.isFetching = false;
         this.studentService.setStudents(students);
         this.students = students;
+      }, errorMessage => {
+        this.isFetching = false;
+        this.error = errorMessage;
       });
+  }
+
+  public onHandleError() {
+    this.error = null;
   }
 
   ngOnDestroy(): void { // dont cause any memory leaks

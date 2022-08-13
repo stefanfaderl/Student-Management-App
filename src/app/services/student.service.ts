@@ -62,12 +62,6 @@ export class StudentService {
     return studentObj;
   }
 
-  public updateStudent(studentName: string, newStudent: Student) {
-    const index = this.students.map(object => object.studentName).indexOf(studentName);
-    this.students[index] = newStudent;
-    this.studentsChanged.next(this.students.slice());
-  }
-
   public handleError(error: HttpErrorResponse) {
     let errorMessage: string = '';
 

@@ -1,4 +1,3 @@
-
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, map, mergeMap, tap } from "rxjs/operators";
@@ -15,11 +14,11 @@ export class DataStorageService {
   ) { }
 
   public createAndStoreStudent(studentData: Student) {
-    return this.http.post<{ name: string }>('https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json', studentData)
+    this.http.post<{ name: string }>('https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json', studentData)
       .pipe(
-        mergeMap(() => this.fetchStudents()
-        ));
-    // post request for one student, put request for all students, any previous students data would be overwritten
+        mergeMap(() => this.fetchStudents()),
+        catchError(this.studentService.handleError))
+      .subscribe();
   }
 
   public fetchStudents() {
@@ -41,10 +40,21 @@ export class DataStorageService {
         catchError(this.studentService.handleError));
   }
 
-  public deleteStudent(id: string) {
-    return this.http
-      .delete<{ [key: string]: Student }>(`https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${id}.json`)
+  public updateStudent(id: string, newStudent: Student) {
+    this.http
+      .put<{ name: string }>(`https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${id}.json`, newStudent)
       .pipe(
-        catchError(this.studentService.handleError));
+        mergeMap(() => this.fetchStudents()),
+        catchError(this.studentService.handleError))
+      .subscribe();
+  }
+
+  public deleteStudent(id: string) {
+    this.http
+      .delete(`https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${id}.json`)
+      .pipe(
+        mergeMap(() => this.fetchStudents()),
+        catchError(this.studentService.handleError))
+      .subscribe();
   }
 }

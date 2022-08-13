@@ -87,8 +87,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
     if (confirm(
       `Bist du dir sicher das du ${studentName} löschen willst?`
     )) {
-      this.dataStorage.deleteStudent(id)
-        .subscribe(() => this.onFetchStudents());
+      this.dataStorage.deleteStudent(id);
     }
   }
 

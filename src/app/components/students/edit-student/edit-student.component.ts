@@ -5,6 +5,7 @@ import { StudentService } from 'src/app/services/student.service';
 import { LearningYear } from 'src/app/shared/models/LearningYear';
 import { Student } from 'src/app/shared/models/Student';
 import { Location } from 'src/app/shared/models/Location';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
   selector: 'app-edit-student',
@@ -14,7 +15,7 @@ import { Location } from 'src/app/shared/models/Location';
 export class EditStudentComponent implements OnInit {
 
   student!: Student;
-  studentName!: string;
+  id!: string;
   studentForm!: FormGroup;
   selectedFile: any = null;
 
@@ -22,14 +23,15 @@ export class EditStudentComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private studentService: StudentService,
+    private dataStorage: DataStorageService
   ) { }
 
   ngOnInit(): void {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.studentName = params['name'];
-          this.student = this.studentService.getStudent(this.studentName); //this.studentName
+          this.id = params['id'];
+          this.student = this.studentService.getStudent(this.id); //this.studentName
           this.initForm();
         }
       )
@@ -41,7 +43,7 @@ export class EditStudentComponent implements OnInit {
     let learningYear: number;
     let studentNotes: string | undefined;
 
-    const student = this.studentService.getStudent(this.studentName); //this.studentName
+    const student = this.studentService.getStudent(this.id); //this.studentName
     studentName = student.studentName;
     studentLocation = student.studentLocation;
     learningYear = student.learningYear;
@@ -85,7 +87,7 @@ export class EditStudentComponent implements OnInit {
       this.studentForm.value['learningYear'],
       this.studentForm.value['studentNotes']
     );
-    this.studentService.updateStudent(this.studentName, newStudent)
+    this.dataStorage.updateStudent(this.id, newStudent);
     this.router.navigate(['../../'], { relativeTo: this.route });
   }
 }

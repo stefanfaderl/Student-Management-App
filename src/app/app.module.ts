@@ -40,6 +40,14 @@ import { MatRadioModule } from '@angular/material/radio';
 import { DataStorageService } from './shared/data-storage.service';
 import { StudentResolverService } from './services/student-resolver.service';
 
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
+import { UploadFormComponent } from './components/students/upload-form/upload-form.component';
+import { UploadListComponent } from './components/students/upload-list/upload-list.component';
+import { UploadDetailsComponent } from './components/students/upload-details/upload-details.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +60,10 @@ import { StudentResolverService } from './services/student-resolver.service';
     SidebarComponent,
     ProfilComponent,
     FilterLocationPipe,
-    FilterYearPipe
+    FilterYearPipe,
+    UploadFormComponent,
+    UploadListComponent,
+    UploadDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +90,10 @@ import { StudentResolverService } from './services/student-resolver.service';
     MatSlideToggleModule,
     MatInputModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [
     StudentService // service in app module make sure that I have 1 instance of the service all the time available as long as the app is running

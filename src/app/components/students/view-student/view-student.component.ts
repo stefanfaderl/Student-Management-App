@@ -12,7 +12,7 @@ import { Student } from 'src/app/shared/models/Student';
 export class ViewStudentComponent implements OnInit {
 
   student!: Student;
-  studentName!: string;
+  id!: string;
 
   constructor(
     private studentService: StudentService,
@@ -23,8 +23,8 @@ export class ViewStudentComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.studentName = params['name'];
-          this.student = this.studentService.getStudent(this.studentName);
+          this.id = params['id'];
+          this.student = this.studentService.getStudent(this.id);
         }
       );
   }

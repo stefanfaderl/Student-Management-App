@@ -97,7 +97,6 @@ export class StudentsComponent implements OnInit, OnDestroy {
     this.dataStorage.fetchStudents()
       .subscribe(students => {
         this.isFetching = false;
-        this.studentService.setStudents(students);
         this.students = students;
       }, errorMessage => {
         this.isFetching = false;

@@ -7,6 +7,7 @@ import { StudentService } from './student.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class StudentResolverService implements Resolve<Student[]>{
 
   constructor(
@@ -17,7 +18,7 @@ export class StudentResolverService implements Resolve<Student[]>{
   /* fetch students method, whenever this route gets loaded */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) { // resolve subscribes automatically once the data is there
     const students = this.studentService.getStudents();
-    if (students.length === 0) {
+    if (students.length === 0) { // for not overwriting the changes of students
       return this.dataStorageService.fetchStudents();
     } else {
       return students;

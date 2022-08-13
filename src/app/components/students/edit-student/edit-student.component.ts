@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -30,7 +29,7 @@ export class EditStudentComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.studentName = params['name'];
-          this.student = this.studentService.getStudent(this.studentName);
+          this.student = this.studentService.getStudent(this.studentName); //this.studentName
           this.initForm();
         }
       )
@@ -42,7 +41,7 @@ export class EditStudentComponent implements OnInit {
     let learningYear: number;
     let studentNotes: string | undefined;
 
-    const student = this.studentService.getStudent(this.studentName);
+    const student = this.studentService.getStudent(this.studentName); //this.studentName
     studentName = student.studentName;
     studentLocation = student.studentLocation;
     learningYear = student.learningYear;

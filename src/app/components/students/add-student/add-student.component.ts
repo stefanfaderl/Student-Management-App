@@ -70,9 +70,7 @@ export class AddStudentComponent implements OnInit {
 
   public onCreateStudent(): void {
     this.dataStorage.createAndStoreStudent(this.studentForm.value)
-      .subscribe(
-        students => this.studentService.setStudents(students),
-        () => catchError(this.studentService.handleError));
+      .subscribe(() => catchError(this.studentService.handleError));
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

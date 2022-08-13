@@ -55,9 +55,11 @@ export class StudentService {
     return this.students.slice(); // return a copie of students array
   }
 
-  public getStudent(name: string) {
-    const index = this.students.map(object => object.studentName).indexOf(name); // return index of object with the relevant property
-    return this.students[index];
+  public getStudent(id: string): Student {
+    let studentObj!: Student;
+    this.students.filter(itemInArray => itemInArray.id === id)
+      .map(res => studentObj = res);
+    return studentObj;
   }
 
   public updateStudent(studentName: string, newStudent: Student) {

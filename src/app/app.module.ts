@@ -38,6 +38,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { DataStorageService } from './shared/data-storage.service';
+import { StudentResolverService } from './services/student-resolver.service';
 
 @NgModule({
   declarations: [

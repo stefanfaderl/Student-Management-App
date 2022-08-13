@@ -13,8 +13,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'students', pathMatch: 'full' },
   { path: 'students', component: StudentsComponent },
   { path: 'students/add', component: AddStudentComponent },
-  { path: 'students/edit/:name', component: EditStudentComponent, resolve: [StudentResolverService] },
-  { path: 'students/view/:name', component: ViewStudentComponent, resolve: [StudentResolverService] },
+  { path: 'students/edit/:id', component: EditStudentComponent, resolve: [StudentResolverService] },
+  { path: 'students/view/:id', component: ViewStudentComponent, resolve: [StudentResolverService] },
   { path: 'to-dos', component: ToDosComponent },
   { path: 'my-profile', component: ProfilComponent },
   { path: '**', component: PageNotFoundComponent }

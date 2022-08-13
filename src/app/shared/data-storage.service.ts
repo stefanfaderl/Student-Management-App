@@ -35,6 +35,9 @@ export class DataStorageService {
           }
           return studentsArray;
         }),
+        tap(students => {
+          this.studentService.setStudents(students)
+        }),
         catchError(this.studentService.handleError));
   }
 

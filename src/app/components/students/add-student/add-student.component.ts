@@ -64,7 +64,8 @@ export class AddStudentComponent implements OnInit {
       'studentName': new FormControl(null, Validators.required),
       'studentLocation': new FormControl(null, Validators.required),
       'learningYear': new FormControl(null, Validators.required),
-      'studentNotes': new FormControl(null)
+      'studentNotes': new FormControl(null),
+      'pdf': new FormControl(null)
     });
   }
 

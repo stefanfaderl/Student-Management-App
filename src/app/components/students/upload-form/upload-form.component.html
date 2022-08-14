@@ -1,8 +1,8 @@
 <div class="margin-b">
-  <label>
+  <mat-label>
     <button type="button" mat-stroked-button (click)="fileInput.click()">Datei auswählen</button>
     <input hidden (change)="selectFile($event)" #fileInput type="file">
-  </label>
+  </mat-label>
 
   <button type="button" mat-button color="accent" [disabled]="!selectedFiles" (click)="upload()">
     <mat-icon class="margin-r">cloud_upload</mat-icon>

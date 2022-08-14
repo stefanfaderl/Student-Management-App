@@ -1,4 +1,9 @@
-<a href="{{ fileUpload.url }}">{{ fileUpload.name }}</a>
-<button (click)="deleteFileUpload(fileUpload)" class="btn btn-danger btn-sm" style="float: right">
-  Delete
-</button>
+<div class="container">
+  <a href="{{ fileUpload.url }}">
+    <mat-icon mat-list-icon class="mr-5" color="accent">insert_drive_file</mat-icon>
+    {{ fileUpload.name }}
+  </a>
+  <button mat-icon-button color="warn" aria-label="button to delete file" (click)="deleteFileUpload(fileUpload)">
+    <mat-icon class="ml-15">delete</mat-icon>
+  </button>
+</div>

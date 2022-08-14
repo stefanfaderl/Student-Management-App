@@ -27,7 +27,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class UploadListComponent implements OnInit {
   displayedColumns: string[] = ['demo-position', 'demo-name', 'demo-weight', 'demo-symbol'];
   dataSource = ELEMENT_DATA;
-  fileUploads?: any[];
+  fileUploads: any[] = [];
 
   constructor(
     private uploadService: FileUploadService

@@ -58,21 +58,14 @@
           </mat-form-field>
         </div>
       </div>
-
       <div class="row">
         <div class="col">
-          <!-- <input type="file" (change)="onFileSelected($event)"> -->
-          <button type="button" mat-stroked-button (click)="fileInput.click()">Datei auswählen</button>
-          <input hidden (change)="onFileSelected($event)" #fileInput type="file">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <p class="file-name">{{selectedFile?.name}}</p>
-          <button type="button" mat-button color="accent">
-            <mat-icon class="margin-r">cloud_upload</mat-icon>
-            <span>Hochladen</span>
-          </button>
+          <div>
+            <app-upload-form></app-upload-form>
+          </div>
+          <div>
+            <app-upload-list></app-upload-list>
+          </div>
         </div>
       </div>
     </mat-card-content>
@@ -84,12 +77,3 @@
     </mat-card-actions>
   </mat-card>
 </form>
-
-<div class="container" style="width:600px">
-  <div>
-    <app-upload-form></app-upload-form>
-  </div>
-  <div>
-    <app-upload-list></app-upload-list>
-  </div>
-</div>

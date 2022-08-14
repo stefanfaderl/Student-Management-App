@@ -47,6 +47,7 @@ import { environment } from '../environments/environment';
 import { UploadFormComponent } from './components/students/upload-form/upload-form.component';
 import { UploadListComponent } from './components/students/upload-list/upload-list.component';
 import { UploadDetailsComponent } from './components/students/upload-details/upload-details.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { UploadDetailsComponent } from './components/students/upload-details/upl
     FilterYearPipe,
     UploadFormComponent,
     UploadListComponent,
-    UploadDetailsComponent
+    UploadDetailsComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

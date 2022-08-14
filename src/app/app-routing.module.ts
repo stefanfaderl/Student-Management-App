@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './components/auth/auth.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { AddStudentComponent } from './components/students/add-student/add-student.component';
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'students/view/:id', component: ViewStudentComponent, resolve: [StudentResolverService] },
   { path: 'to-dos', component: ToDosComponent },
   { path: 'my-profile', component: ProfilComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'auth', component: AuthComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

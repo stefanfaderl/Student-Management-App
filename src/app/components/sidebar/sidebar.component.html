@@ -4,6 +4,7 @@
     [mode]="(isHandset$ | async) ? 'push' : 'side'">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
+      <a mat-list-item routerLink="auth" (click)="drawer.toggle()" routerLinkActive="active-link">Authentifizieren</a>
       <a mat-list-item routerLink="/students" (click)="drawer.toggle()" routerLinkActive="active-link">Schülerliste</a>
       <a mat-list-item routerLink="/to-dos" (click)="drawer.toggle()" routerLinkActive="active-link">Meine to do's</a>
       <a mat-list-item routerLink="/my-profile" (click)="drawer.toggle()" routerLinkActive="active-link">Mein
@@ -22,6 +23,7 @@
       </span>
       <span class="spacer"></span>
       <div [class.hidden]="isHandset$ |async">
+        <a mat-button routerLink="auth" routerLinkActive="active-link">Authentifizieren</a>
         <a mat-button routerLink="/students" routerLinkActive="active-link">Schülerliste</a>
         <a mat-button routerLink="/to-dos" routerLinkActive="active-link">Meine to do's</a>
         <a mat-button routerLink="/my-profile" routerLinkActive="active-link">Mein Profil</a>

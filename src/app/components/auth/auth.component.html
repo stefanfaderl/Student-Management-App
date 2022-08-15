@@ -1,18 +1,35 @@
-<form class="example-form">
+<div *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<section *ngIf="error">
+  <mat-card class="error-card">
+    <mat-card-title-group>
+      <mat-card-title>{{ error }}</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-actions>
+      <button button mat-raised-button (click)="onHandleError()">Schließen</button>
+    </mat-card-actions>
+  </mat-card>
+</section>
+
+<!-- template driven approach -->
+<form #authForm="ngForm" class="example-form" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label aria-label="Email">Email</mat-label>
-    <input matInput>
+    <input matInput ngModel name="email" required email>
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label aria-label="password">Enter your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'">
+    <input matInput [type]="hide ? 'password' : 'text'" ngModel name="password" required minlength="6">
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide">
+      [attr.aria-pressed]="hide" type="button">
       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
   </mat-form-field>
   <div>
-    <button mat-raised-button color="primary" type="submit">{{ isLoginMode ? 'Login' : 'Registrieren' }}</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!authForm.valid">{{ isLoginMode ? 'Login' :
+      'Registrieren' }}</button>
     |
     <button mat-raised-button color="accent" type="button" (click)="onSwitchMode()">
       {{ isLoginMode ? ' Zur Registrierung' : 'Zum Login'}} wechseln</button>

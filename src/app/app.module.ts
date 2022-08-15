@@ -37,9 +37,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
-import { DataStorageService } from './shared/data-storage.service';
-import { StudentResolverService } from './services/student-resolver.service';
-
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
@@ -48,6 +45,8 @@ import { UploadFormComponent } from './components/students/upload-form/upload-fo
 import { UploadListComponent } from './components/students/upload-list/upload-list.component';
 import { UploadDetailsComponent } from './components/students/upload-details/upload-details.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -65,7 +64,8 @@ import { AuthComponent } from './components/auth/auth.component';
     UploadFormComponent,
     UploadListComponent,
     UploadDetailsComponent,
-    AuthComponent
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +93,7 @@ import { AuthComponent } from './components/auth/auth.component';
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
+    MatProgressSpinnerModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireStorageModule

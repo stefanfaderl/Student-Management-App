@@ -16,12 +16,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private userSub!: Subscription;
 
-
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !user ? false : true; // !!user also works
-      console.log(!user);
-      console.log(!!user);
     });
 
     this.toggleControl.valueChanges.subscribe((darkMode) => {

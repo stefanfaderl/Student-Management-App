@@ -4,11 +4,18 @@
     [mode]="(isHandset$ | async) ? 'push' : 'side'">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="auth" (click)="drawer.toggle()" routerLinkActive="active-link">Authentifizieren</a>
-      <a mat-list-item routerLink="/students" (click)="drawer.toggle()" routerLinkActive="active-link">Schülerliste</a>
-      <a mat-list-item routerLink="/to-dos" (click)="drawer.toggle()" routerLinkActive="active-link">Meine to do's</a>
-      <a mat-list-item routerLink="/my-profile" (click)="drawer.toggle()" routerLinkActive="active-link">Mein
+      <a mat-list-item routerLink="auth" (click)="drawer.toggle()" routerLinkActive="active-link"
+        *ngIf="!isAuthenticated">Authentifizieren</a>
+      <a mat-list-item routerLink="/students" (click)="drawer.toggle()" routerLinkActive="active-link"
+        *ngIf="isAuthenticated">Schülerliste</a>
+      <a mat-list-item routerLink="/to-dos" (click)="drawer.toggle()" routerLinkActive="active-link"
+        *ngIf="isAuthenticated">Meine to do's</a>
+      <a mat-list-item routerLink="/my-profile" (click)="drawer.toggle()" routerLinkActive="active-link"
+        *ngIf="isAuthenticated">Mein
         Profil</a>
+      <a mat-list-item (click)="drawer.toggle()" routerLinkActive="active-link" *ngIf="isAuthenticated"
+        (click)="onLogout()">
+        Logout</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -18,20 +25,21 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span routerLink="/students">
+      <span routerLink="auth">
         <a>Student Management App </a>
       </span>
       <span class="spacer"></span>
       <div [class.hidden]="isHandset$ |async">
-        <a mat-button routerLink="auth" routerLinkActive="active-link">Authentifizieren</a>
-        <a mat-button routerLink="/students" routerLinkActive="active-link">Schülerliste</a>
-        <a mat-button routerLink="/to-dos" routerLinkActive="active-link">Meine to do's</a>
-        <a mat-button routerLink="/my-profile" routerLinkActive="active-link">Mein Profil</a>
+        <a mat-button routerLink="auth" routerLinkActive="active-link" *ngIf="!isAuthenticated">Authentifizieren</a>
+        <a mat-button routerLink="/students" routerLinkActive="active-link" *ngIf="isAuthenticated">Schülerliste</a>
+        <a mat-button routerLink="/to-dos" routerLinkActive="active-link" *ngIf="isAuthenticated">Meine to do's</a>
+        <a mat-button routerLink="/my-profile" routerLinkActive="active-link" *ngIf="isAuthenticated">Mein Profil</a>
+        <a mat-button routerLinkActive="active-link" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a>
       </div>
       <mat-slide-toggle [formControl]="toggleControl"></mat-slide-toggle>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <!-- with noch ändern bei tabled -->
+
     <div class="grid-container">
       <router-outlet>
       </router-outlet>

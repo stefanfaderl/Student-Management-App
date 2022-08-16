@@ -1,16 +1,38 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+
+export class SidebarComponent implements OnInit, OnDestroy {
+  isAuthenticated = false;
+  private userSub!: Subscription;
+
+
+  ngOnInit() {
+    this.userSub = this.authService.user.subscribe(user => {
+      this.isAuthenticated = !user ? false : true; // !!user also works
+      console.log(!user);
+      console.log(!!user);
+    });
+
+    this.toggleControl.valueChanges.subscribe((darkMode) => {
+      this.className = darkMode ? this.darkClassName : this.lightClassName;
+      if (darkMode) {
+        this.overlay.getContainerElement().classList.add(this.darkClassName);
+      } else {
+        this.overlay.getContainerElement().classList.remove(this.darkClassName);
+      }
+    })
+  }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe([
     Breakpoints.XSmall, // (max-width: 599.98px)
@@ -22,7 +44,8 @@ export class SidebarComponent {
     );
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private overlay: OverlayContainer
+    private overlay: OverlayContainer,
+    private authService: AuthService
   ) { }
 
   toggleControl = new FormControl(false);
@@ -30,15 +53,11 @@ export class SidebarComponent {
   darkClassName = 'theme-dark';
   lightClassName = 'theme-light';
 
-  ngOnInit() {
-    this.toggleControl.valueChanges.subscribe((darkMode) => {
-      this.className = darkMode ? this.darkClassName : this.lightClassName;
-      if (darkMode) {
-        this.overlay.getContainerElement().classList.add(this.darkClassName);
-      } else {
-        this.overlay.getContainerElement().classList.remove(this.darkClassName);
-      }
-    })
+  public onLogout() {
+    this.authService.logout();
   }
 
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
 }

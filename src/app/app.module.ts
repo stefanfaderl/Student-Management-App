@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
@@ -47,6 +47,7 @@ import { UploadDetailsComponent } from './components/students/upload-details/upl
 import { AuthComponent } from './components/auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthInterceptorService } from './components/auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AngularFireStorageModule
   ],
   providers: [
-    StudentService // service in app module make sure that I have 1 instance of the service all the time available as long as the app is running
+    StudentService, // service in app module make sure that I have 1 instance of the service all the time available as long as the app is running
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

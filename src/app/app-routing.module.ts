@@ -11,7 +11,7 @@ import { ToDosComponent } from './components/to-dos/to-dos.component';
 import { StudentResolverService } from './services/student-resolver.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'students', pathMatch: 'full' },
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'students', component: StudentsComponent },
   { path: 'students/add', component: AddStudentComponent },
   { path: 'students/edit/:id', component: EditStudentComponent, resolve: [StudentResolverService] },

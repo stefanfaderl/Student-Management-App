@@ -2,13 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
 import { StudentService } from 'src/app/services/student.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { LearningYear } from 'src/app/shared/models/LearningYear';
 import { Location } from 'src/app/shared/models/Location';
 import { Student } from 'src/app/shared/models/Student';
-
 
 @Component({
   selector: 'app-add-student',
@@ -24,9 +22,7 @@ export class AddStudentComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private dataStorage: DataStorageService,
-    private studentService: StudentService,
-    private http: HttpClient
+    private dataStorage: DataStorageService
   ) { }
 
   public onFileSelected(event: any): void {

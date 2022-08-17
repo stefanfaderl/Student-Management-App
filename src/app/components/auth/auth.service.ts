@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthResponseData } from 'src/app/shared/models/authResponseData';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, take, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private angularFireAuth: AngularFireAuth
   ) { }
 
   public signup(email: string, password: string) {
@@ -41,6 +43,13 @@ export class AuthService {
   }
 
   public login(email: string, password: string) {
+    this.angularFireAuth.signInWithEmailAndPassword(email, password) // set authentication firebase storage
+      .then(() => this.angularFireAuth.authState
+        .subscribe())
+      .catch((error) => {
+        window.alert('StorageAuthError' + error.message);
+      });
+
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC8DVWmYUc1eXKqj2QwGm5dIgZ4m_aUXJ0 ',
       {
         email: email,
@@ -88,6 +97,7 @@ export class AuthService {
   }
 
   public logout() {
+    this.angularFireAuth.signOut(); // logout authentication firebase storage
     this.user.next(null!);
     this.router.navigate(['auth']);
     localStorage.removeItem('userData');
@@ -99,6 +109,7 @@ export class AuthService {
 
   public autoLogout(expirationDuration: number) { // in ms
     this.tokenExpirationTimer = setTimeout(() => {
+      this.angularFireAuth.signOut();
       this.logout();
     }, expirationDuration);
   }

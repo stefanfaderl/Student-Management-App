@@ -12,12 +12,13 @@ import { FileUpload } from '../shared/models/file-upload.model';
 export class FileUploadService {
 
   private basePath = '/uploads';
+
   constructor(
     private db: AngularFireDatabase,
     private storage: AngularFireStorage
   ) { }
 
-  pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
+  public pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
@@ -37,12 +38,12 @@ export class FileUploadService {
     this.db.list(this.basePath).push(fileUpload);
   }
 
-  getFiles(numberItems: number): AngularFireList<FileUpload> {
+  public getFiles(numberItems: number): AngularFireList<FileUpload> {
     return this.db.list(this.basePath, ref =>
       ref.limitToLast(numberItems));
   }
 
-  deleteFile(fileUpload: FileUpload): void {
+  public deleteFile(fileUpload: FileUpload): void {
     this.deleteFileDatabase(fileUpload.key)
       .then(() => {
         this.deleteFileStorage(fileUpload.name);

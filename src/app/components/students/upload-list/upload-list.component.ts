@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { map } from 'rxjs/operators';
 
-
-
-
 export interface PeriodicElement {
   name: string;
   position: number;

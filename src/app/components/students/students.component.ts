@@ -5,7 +5,6 @@ import { Student } from 'src/app/shared/models/Student';
 import { StudentService } from 'src/app/services/student.service';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
-import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-students',

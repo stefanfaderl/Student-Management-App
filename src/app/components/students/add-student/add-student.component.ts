@@ -43,9 +43,7 @@ export class AddStudentComponent implements OnInit {
     { learningYear: 5 },
     { learningYear: 6 },
     { learningYear: 7 },
-    { learningYear: 8 },
-    { learningYear: 9 },
-    { learningYear: 10 },
+    { learningYear: 8 }
   ];
 
   locations: Location[] = [

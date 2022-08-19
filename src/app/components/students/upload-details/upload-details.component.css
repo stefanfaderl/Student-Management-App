@@ -5,6 +5,10 @@
 }
 .container a {
   cursor: default;
+  color: black;
+}
+.container :hover {
+  color: royalblue;
 }
 
 .mr-5 {

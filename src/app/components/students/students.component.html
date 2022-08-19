@@ -32,7 +32,7 @@
         <div class="example-box" *ngFor="let student of students | filterLocation: location" cdkDragLockAxis="y"
           cdkDrag>
           <mat-icon aria-label="drag_indicator">drag_indicator</mat-icon>
-          {{student.studentName}}
+          <span class="name-width">{{student.studentName}}</span>
           <a mat-button color="accent" routerLink="view/{{student.id}}">
             <mat-icon aria-label="edit_icon">visibility</mat-icon>
           </a>

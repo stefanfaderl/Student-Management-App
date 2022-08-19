@@ -6,6 +6,7 @@ import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthService {
   ) { }
 
   public signup(email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC8DVWmYUc1eXKqj2QwGm5dIgZ4m_aUXJ0',
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
       {
         email: email,
         password: password,
@@ -50,7 +51,7 @@ export class AuthService {
         window.alert('StorageAuthError' + error.message);
       });
 
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC8DVWmYUc1eXKqj2QwGm5dIgZ4m_aUXJ0 ',
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey,
       {
         email: email,
         password: password,

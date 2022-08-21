@@ -48,7 +48,7 @@ export class AuthService {
       .then(() => this.angularFireAuth.authState
         .subscribe())
       .catch((error) => {
-        window.alert('StorageAuthError' + error.message);
+        console.log('StorageAuthError' + error.message);
       });
 
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey,

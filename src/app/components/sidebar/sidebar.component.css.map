@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["sidebar.component.scss"],"names":[],"mappings":"AAAA;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAOF;EACE;EACA;EACA;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;IACE","file":"sidebar.component.css"}
+{"version":3,"sourceRoot":"","sources":["sidebar.component.scss"],"names":[],"mappings":"AAAA;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAOF;EACE;EACA;EACA;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;IACE;;EAEF;IACE;;;AAIJ;EACE;IACE","file":"sidebar.component.css"}

@@ -1,5 +1,5 @@
 .grid-container {
-  margin: 20px;
+  margin: 10px;
 }
 
 .sidenav-container {
@@ -32,6 +32,18 @@ a {
   cursor: pointer;
 }
 
+.title {
+  font-size: 18px;
+}
+
+@media screen and (min-width: 600px) {
+  .grid-container {
+    margin: 20px;
+  }
+  .title {
+    font-size: 20px;
+  }
+}
 @media screen and (min-width: 1280px) {
   .grid-container {
     margin: 20px 50px;

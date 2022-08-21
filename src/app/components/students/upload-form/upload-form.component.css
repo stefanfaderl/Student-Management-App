@@ -1,7 +1,26 @@
+.upload-container {
+  margin-bottom: 10px;
+}
+
 .margin-r {
   margin-right: 10px;
 }
 
-.margin-b {
+.flex-container-upload {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   margin-bottom: 10px;
+}
+.flex-container-upload > button {
+  margin-bottom: 15px;
+}
+
+@media screen and (min-width: 600px) {
+  .flex-container-upload {
+    flex-direction: row;
+  }
+  .flex-container-upload > button {
+    margin-right: 15px;
+  }
 }/*# sourceMappingURL=upload-form.component.css.map */

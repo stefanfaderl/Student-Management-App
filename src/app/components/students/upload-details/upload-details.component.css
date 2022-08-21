@@ -1,21 +1,26 @@
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  margin: 15px 0;
+  word-break: break-all;
   align-items: center;
 }
 .container a {
   cursor: default;
   color: black;
 }
+.container a span {
+  line-height: 30px;
+}
 .container :hover {
   color: royalblue;
 }
 
 .mr-5 {
+  font-size: 1.6em;
   margin-right: 5px;
 }
 
 .ml-15 {
-  margin-top: 3px;
-  margin-left: 15px;
+  font-size: 2em;
 }/*# sourceMappingURL=upload-details.component.css.map */

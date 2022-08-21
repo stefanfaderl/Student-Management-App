@@ -1,10 +1,15 @@
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  margin: 15px 0;
+  word-break: break-all;
   align-items: center;
   a {
     cursor: default;
     color: black;
+    span {
+      line-height: 30px;
+    }
   }
   :hover {
     color: royalblue;
@@ -12,10 +17,13 @@
 }
 
 .mr-5 {
+  font-size: 1.6em;
   margin-right: 5px;
 }
 
 .ml-15 {
-  margin-top: 3px;
-  margin-left: 15px;
+  font-size: 2em;
+}
+
+@media screen and (min-width: 600px) {
 }

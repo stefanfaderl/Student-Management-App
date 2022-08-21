@@ -69,8 +69,8 @@ body {
 }
 
 .error-card {
-  color: white;
-  background-color: #f44336;
+  color: white !important;
+  background-color: #f44336 !important;
   max-width: 400px;
   margin-bottom: 8px;
   padding: 20px !important;

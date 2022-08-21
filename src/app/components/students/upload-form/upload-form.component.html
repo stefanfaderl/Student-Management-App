@@ -1,13 +1,13 @@
-<div class="margin-b">
-  <mat-label>
+<div class="upload-container">
+  <div class="flex-container-upload">
     <button type="button" mat-stroked-button (click)="fileInput.click()">Datei auswählen</button>
     <input hidden (change)="selectFile($event)" #fileInput type="file">
-  </mat-label>
 
-  <button type="button" mat-button color="accent" [disabled]="!selectedFiles" (click)="upload()">
-    <mat-icon class="margin-r">cloud_upload</mat-icon>
-    <span>Hochladen</span>
-  </button>
+    <button type="button" mat-button color="accent" [disabled]="!selectedFiles" (click)="upload()">
+      <mat-icon class="margin-r">cloud_upload</mat-icon>
+      <span>Hochladen</span>
+    </button>
+  </div>
 
   <div *ngIf="currentFileUpload">
     <div role="progressbar" attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100">

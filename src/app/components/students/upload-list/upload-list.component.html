@@ -1,8 +1,4 @@
-<div *ngIf="fileUploads.length > 0">
-  <mat-list>
-    <div mat-subheader>Übersicht ALLER Dateien</div>
-    <mat-list-item *ngFor="let file of fileUploads">
-      <app-upload-details [fileUpload]='file'></app-upload-details>
-    </mat-list-item>
-  </mat-list>
-</div>
+<article *ngIf="fileUploads.length > 0">
+  <h3>Übersicht ALLER Dateien:</h3>
+  <app-upload-details *ngFor="let file of fileUploads" [fileUpload]='file'></app-upload-details>
+</article>

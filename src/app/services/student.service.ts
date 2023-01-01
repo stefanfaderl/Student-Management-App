@@ -7,42 +7,8 @@ import { Student } from '../shared/models/Student';
   providedIn: 'root'
 })
 export class StudentService {
-
   private students: Student[] = [];
-  studentsChanged = new Subject<Student[]>();
-
-  /*   private students: Student[] = [
-      new Student(
-        'Hansi',
-        'Behamberg',
-        2,
-        'Super'
-      ),
-      new Student(
-        'Franz',
-        'Haidershofen',
-        3,
-        'Unpünktlich'
-      ),
-      new Student(
-        'Sissi',
-        'Haidershofen',
-        3,
-        'Gut'
-      ),
-      new Student(
-        'Bert',
-        'Behamberg',
-        4,
-        'Super'
-      ),
-      new Student(
-        'Marie',
-        'Ernsthofen',
-        1,
-        'Super'
-      )
-    ]; */
+  public studentsChanged = new Subject<Student[]>();
 
   constructor() { }
 

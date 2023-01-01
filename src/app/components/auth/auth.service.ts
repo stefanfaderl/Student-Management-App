@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthResponseData } from 'src/app/shared/models/authResponseData';
-import { catchError, take, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 
 export class AuthService {
-  user = new BehaviorSubject<User>(null!);
+  public user = new BehaviorSubject<User>(null!);
   private tokenExpirationTimer: any;
 
   constructor(
@@ -21,6 +21,11 @@ export class AuthService {
     private router: Router,
     private angularFireAuth: AngularFireAuth
   ) { }
+
+  public getUserId() {
+    const user: User = this.user.getValue();
+    return user.id;
+  }
 
   public signup(email: string, password: string) {
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
@@ -44,7 +49,8 @@ export class AuthService {
   }
 
   public login(email: string, password: string) {
-    this.angularFireAuth.signInWithEmailAndPassword(email, password) // set authentication firebase storage
+    // set authentication firebase storage
+    this.angularFireAuth.signInWithEmailAndPassword(email, password)
       .then(() => this.angularFireAuth.authState
         .subscribe())
       .catch((error) => {

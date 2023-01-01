@@ -10,7 +10,6 @@ import { Student } from 'src/app/shared/models/Student';
 })
 
 export class ViewStudentComponent implements OnInit {
-
   student!: Student;
   id!: string;
 

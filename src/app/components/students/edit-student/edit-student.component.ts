@@ -31,7 +31,7 @@ export class EditStudentComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
-          this.student = this.studentService.getStudent(this.id); //this.studentName
+          this.student = this.studentService.getStudent(this.id);
           this.initForm();
         }
       )

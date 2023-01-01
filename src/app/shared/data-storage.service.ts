@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, exhaustMap, map, mergeMap, take, tap } from "rxjs/operators";
+import { catchError, map, mergeMap, tap } from "rxjs/operators";
 import { AuthService } from "../components/auth/auth.service";
 import { StudentService } from "../services/student.service";
 import { Student } from "./models/Student";
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Injectable({ providedIn: 'root' })
 
@@ -12,21 +13,32 @@ export class DataStorageService {
   constructor(
     private http: HttpClient,
     private studentService: StudentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private db: AngularFireDatabase
   ) { }
 
   public createAndStoreStudent(studentData: Student) {
+    const currentUserId = this.authService.getUserId();
+
     this.http.post<{ name: string }>('https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json', studentData)
       .pipe(
         mergeMap(() => this.fetchStudents()),
         catchError(this.studentService.handleError))
       .subscribe();
+    this.addStudentNode(currentUserId, studentData);
+  }
+
+  /* add usernode in db with studentdata as child */
+  private addStudentNode(userId: string, studentData: Student) {
+    this.db.list(`students/${userId}`).push(studentData);
   }
 
   public fetchStudents() {
+    const currentUserId = this.authService.getUserId();
+
     return this.http
       .get<{ [key: string]: Student }>(
-        'https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json'
+        `https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${currentUserId}.json`
       )
       .pipe(
         map(responseData => {
@@ -46,8 +58,9 @@ export class DataStorageService {
   }
 
   public updateStudent(id: string, newStudent: Student) {
+    const currentUserId = this.authService.getUserId();
     this.http
-      .put<{ name: string }>(`https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${id}.json`, newStudent)
+      .put<{ name: string }>(`https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${currentUserId}/${id}.json`, newStudent)
       .pipe(
         mergeMap(() => this.fetchStudents()),
         catchError(this.studentService.handleError))
@@ -55,8 +68,9 @@ export class DataStorageService {
   }
 
   public deleteStudent(id: string) {
+    const currentUserId = this.authService.getUserId();
     this.http
-      .delete(`https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${id}.json`)
+      .delete(`https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${currentUserId}/${id}.json`)
       .pipe(
         mergeMap(() => this.fetchStudents()),
         catchError(this.studentService.handleError))

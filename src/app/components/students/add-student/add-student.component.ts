@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudentService } from 'src/app/services/student.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { LearningYear } from 'src/app/shared/models/LearningYear';
 import { Location } from 'src/app/shared/models/Location';
@@ -13,6 +11,7 @@ import { Student } from 'src/app/shared/models/Student';
   templateUrl: './add-student.component.html',
   styleUrls: ['./add-student.component.scss']
 })
+
 export class AddStudentComponent implements OnInit {
   student!: Student;
   studentName!: string;
@@ -51,7 +50,6 @@ export class AddStudentComponent implements OnInit {
     { 'cityName': 'Behamberg' },
     { 'cityName': 'Ernsthofen' },
   ]
-
 
   ngOnInit(): void {
     this.studentForm = new FormGroup({ // properties should be the same as the model student

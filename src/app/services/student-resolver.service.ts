@@ -15,8 +15,14 @@ export class StudentResolverService implements Resolve<Student[]>{
     private studentService: StudentService
   ) { }
 
-  /* fetch students method, whenever this route gets loaded */
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) { // resolve subscribes automatically once the data is there
+  /*
+  fetch students method, whenever this route gets loaded
+  resolve subscribes automatically once the data is there
+  */
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ) {
     const students = this.studentService.getStudents();
     if (students.length === 0) {
       return this.dataStorageService.fetchStudents();

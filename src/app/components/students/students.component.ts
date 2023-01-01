@@ -106,7 +106,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
     this.error = null;
   }
 
-  ngOnDestroy(): void { // dont cause any memory leaks
+  ngOnDestroy(): void { // don't cause any memory leaks
     this.subscription.unsubscribe();
   }
 }

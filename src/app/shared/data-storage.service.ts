@@ -4,7 +4,6 @@ import { catchError, map, mergeMap, tap } from "rxjs/operators";
 import { AuthService } from "../components/auth/auth.service";
 import { StudentService } from "../services/student.service";
 import { Student } from "./models/Student";
-import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Injectable({ providedIn: 'root' })
 
@@ -13,24 +12,17 @@ export class DataStorageService {
   constructor(
     private http: HttpClient,
     private studentService: StudentService,
-    private authService: AuthService,
-    private db: AngularFireDatabase
+    private authService: AuthService
   ) { }
 
   public createAndStoreStudent(studentData: Student) {
     const currentUserId = this.authService.getUserId();
 
-    this.http.post<{ name: string }>('https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students.json', studentData)
+    this.http.post<{ name: string }>(`https://student-management-app-743b9-default-rtdb.europe-west1.firebasedatabase.app/students/${currentUserId}.json`, studentData)
       .pipe(
         mergeMap(() => this.fetchStudents()),
         catchError(this.studentService.handleError))
-      .subscribe();
-    this.addStudentNode(currentUserId, studentData);
-  }
-
-  /* add usernode in db with studentdata as child */
-  private addStudentNode(userId: string, studentData: Student) {
-    this.db.list(`students/${userId}`).push(studentData);
+      .subscribe(); //add usernode in db with studentdata as child
   }
 
   public fetchStudents() {

@@ -1,7 +1,7 @@
 <div class="container">
-  <a href="{{ fileUpload.url }}" target="_blank" class="dark-link">
+  <a href="{{ fileUpload.downloadURL }}" target="_blank" class="dark-link">
     <mat-icon class="mr-5" color="accent">insert_drive_file</mat-icon>
-    <span>{{ fileUpload.name }}</span>
+    <span>{{ fileUpload.file.name }}</span>
   </a>
   <button mat-icon-button color="warn" aria-label="button to delete file" (click)="deleteFileUpload(fileUpload)">
     <mat-icon class="ml-15">delete</mat-icon>

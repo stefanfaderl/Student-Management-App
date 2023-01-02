@@ -1,4 +1,4 @@
 <article *ngIf="fileUploads.length > 0">
-  <h3>Übersicht ALLER Dateien:</h3>
+  <h3>Übersicht deiner hochgeladenen Dateien:</h3>
   <app-upload-details *ngFor="let file of fileUploads" [fileUpload]='file'></app-upload-details>
 </article>

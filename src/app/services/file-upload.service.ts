@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from '../components/auth/auth.service';
 import { FileUpload } from '../shared/models/file-upload.model';
@@ -10,12 +10,12 @@ import { FileUpload } from '../shared/models/file-upload.model';
 })
 
 export class FileUploadService {
-
   private basePath = '/uploads';
+  public filesChanged$: Subject<FileUpload> = new Subject<FileUpload>();
 
   constructor(
     private storage: AngularFireStorage,
-    private authService: AuthService,
+    private authService: AuthService
   ) { }
 
   public pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
@@ -46,20 +46,17 @@ export class FileUploadService {
       const file = new File([], metadata.name || '', { type: metadata.contentType || '' });
       fileUploads.push(new FileUpload(file, downloadURL));
     }
-
     return fileUploads;
   }
 
-  public deleteFile(fileUpload: FileUpload): void {
-    this.deleteFileStorage(fileUpload.name);
-  }
-
-  /*   private deleteFileDatabase(key: string): Promise<void> {
-      return this.db.list(this.basePath).remove(key);
-    } */
-
-  private deleteFileStorage(name: string): void {
-    const storageRef = this.storage.ref(this.basePath);
-    storageRef.child(name).delete();
+  public async deleteFile(fileUpload: FileUpload): Promise<void> {
+    const currentUserId = this.authService.getUserId();
+    const filePath = `${this.basePath}/${currentUserId}`;
+    const storageRef = this.storage.ref(filePath);
+    storageRef.child(fileUpload.file.name).delete();
+    const files = await this.getFiles('/uploads');
+    files.forEach(file => {
+      this.filesChanged$.next(file);
+    });
   }
 }

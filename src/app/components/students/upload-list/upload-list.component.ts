@@ -9,8 +9,8 @@ import { FileUpload } from 'src/app/shared/models/file-upload.model';
 })
 
 export class UploadListComponent implements OnInit {
-  displayedColumns: string[] = ['demo-position', 'demo-name', 'demo-weight', 'demo-symbol'];
-  fileUploads: FileUpload[] = [];
+  public fileUploads: FileUpload[] = [];
+  public changedFileUploads: FileUpload[] = [];
 
   constructor(
     private uploadService: FileUploadService
@@ -21,5 +21,15 @@ export class UploadListComponent implements OnInit {
     files.forEach(file => {
       this.fileUploads.push(file);
     });
+
+    // Update the list if files were deleted
+    this.uploadService.filesChanged$.subscribe(async file => {
+      await this.updateChangedFileUploads(file);
+      this.fileUploads = this.changedFileUploads;
+    });
+  }
+
+  async updateChangedFileUploads(file: FileUpload): Promise<void> {
+    this.changedFileUploads.push(file);
   }
 }

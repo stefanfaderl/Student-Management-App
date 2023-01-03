@@ -8,7 +8,6 @@ import { FileUpload } from 'src/app/shared/models/file-upload.model';
   styleUrls: ['./upload-details.component.scss']
 })
 export class UploadDetailsComponent implements OnInit {
-
   @Input() fileUpload!: FileUpload;
 
   constructor(

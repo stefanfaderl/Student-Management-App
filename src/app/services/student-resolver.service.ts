@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { DataStorageService } from '../shared/data-storage.service';
 import { Student } from '../shared/models/Student';
 import { StudentService } from './student.service';
@@ -8,7 +8,7 @@ import { StudentService } from './student.service';
   providedIn: 'root'
 })
 
-export class StudentResolverService implements Resolve<Student[]>{
+export class StudentResolverService {
 
   constructor(
     private dataStorageService: DataStorageService,

@@ -109,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "Student-Management-App"
+  "defaultProject": "Student-Management-App",
+  "cli": {
+    "analytics": false
+  }
 }

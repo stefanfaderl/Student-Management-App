@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Student-Management-App:build:production"
+              "buildTarget": "Student-Management-App:build:production"
             },
             "development": {
-              "browserTarget": "Student-Management-App:build:development"
+              "buildTarget": "Student-Management-App:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Student-Management-App:build"
+            "buildTarget": "Student-Management-App:build"
           }
         },
         "test": {
@@ -109,7 +109,6 @@
       }
     }
   },
-  "defaultProject": "Student-Management-App",
   "cli": {
     "analytics": false
   }

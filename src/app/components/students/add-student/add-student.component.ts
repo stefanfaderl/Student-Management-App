@@ -7,9 +7,10 @@ import { Location } from 'src/app/shared/models/Location';
 import { Student } from 'src/app/shared/models/Student';
 
 @Component({
-  selector: 'app-add-student',
-  templateUrl: './add-student.component.html',
-  styleUrls: ['./add-student.component.scss']
+    selector: 'app-add-student',
+    templateUrl: './add-student.component.html',
+    styleUrls: ['./add-student.component.scss'],
+    standalone: false
 })
 
 export class AddStudentComponent implements OnInit {

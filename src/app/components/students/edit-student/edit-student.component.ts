@@ -8,9 +8,10 @@ import { Location } from 'src/app/shared/models/Location';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
-  selector: 'app-edit-student',
-  templateUrl: './edit-student.component.html',
-  styleUrls: ['./edit-student.component.scss']
+    selector: 'app-edit-student',
+    templateUrl: './edit-student.component.html',
+    styleUrls: ['./edit-student.component.scss'],
+    standalone: false
 })
 export class EditStudentComponent implements OnInit {
 

@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Student } from '../shared/models/Student';
 
 @Pipe({
-  name: 'filterLocation'
+    name: 'filterLocation',
+    standalone: false
 })
 export class FilterLocationPipe implements PipeTransform {
 

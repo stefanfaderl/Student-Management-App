@@ -4,9 +4,10 @@ import { StudentService } from 'src/app/services/student.service';
 import { Student } from 'src/app/shared/models/Student';
 
 @Component({
-  selector: 'app-view-student',
-  templateUrl: './view-student.component.html',
-  styleUrls: ['./view-student.component.scss']
+    selector: 'app-view-student',
+    templateUrl: './view-student.component.html',
+    styleUrls: ['./view-student.component.scss'],
+    standalone: false
 })
 
 export class ViewStudentComponent implements OnInit {

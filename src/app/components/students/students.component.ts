@@ -7,9 +7,10 @@ import { Subscription } from 'rxjs';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
-  selector: 'app-students',
-  templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss']
+    selector: 'app-students',
+    templateUrl: './students.component.html',
+    styleUrls: ['./students.component.scss'],
+    standalone: false
 })
 
 export class StudentsComponent implements OnInit, OnDestroy {

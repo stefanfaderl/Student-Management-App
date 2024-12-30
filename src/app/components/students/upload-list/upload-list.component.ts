@@ -3,9 +3,10 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 import { FileUpload } from 'src/app/shared/models/file-upload.model';
 
 @Component({
-  selector: 'app-upload-list',
-  templateUrl: './upload-list.component.html',
-  styleUrls: ['./upload-list.component.scss']
+    selector: 'app-upload-list',
+    templateUrl: './upload-list.component.html',
+    styleUrls: ['./upload-list.component.scss'],
+    standalone: false
 })
 
 export class UploadListComponent implements OnInit {

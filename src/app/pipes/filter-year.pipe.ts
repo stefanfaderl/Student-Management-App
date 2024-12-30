@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Student } from '../shared/models/Student';
 
 @Pipe({
-  name: 'filterYear'
+    name: 'filterYear',
+    standalone: false
 })
 export class FilterYearPipe implements PipeTransform {
   transform(value: Student[], currentYear: number): Student[] {

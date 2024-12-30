@@ -47,57 +47,59 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
 import { AuthInterceptorService } from './components/auth/auth-interceptor.service';
 
-@NgModule({ declarations: [
-        AppComponent,
-        StudentsComponent,
-        ToDosComponent,
-        AddStudentComponent,
-        EditStudentComponent,
-        ViewStudentComponent,
-        PageNotFoundComponent,
-        SidebarComponent,
-        ProfilComponent,
-        FilterLocationPipe,
-        FilterYearPipe,
-        UploadFormComponent,
-        UploadListComponent,
-        UploadDetailsComponent,
-        AuthComponent,
-        LoadingSpinnerComponent
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatSliderModule,
-        MatIconModule,
-        MatButtonModule,
-        MatToolbarModule,
-        LayoutModule,
-        MatSidenavModule,
-        MatListModule,
-        MatGridListModule,
-        DragDropModule,
-        MatCardModule,
-        MatMenuModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatButtonToggleModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSlideToggleModule,
-        MatInputModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatProgressSpinnerModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireDatabaseModule], providers: [
-        StudentService, // service in app module make sure that I have 1 instance of the service all the time available as long as the app is running
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptorService,
-            multi: true
-        },
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    StudentsComponent,
+    ToDosComponent,
+    AddStudentComponent,
+    EditStudentComponent,
+    ViewStudentComponent,
+    PageNotFoundComponent,
+    SidebarComponent,
+    ProfilComponent,
+    FilterLocationPipe,
+    FilterYearPipe,
+    UploadFormComponent,
+    UploadListComponent,
+    UploadDetailsComponent,
+    AuthComponent,
+    LoadingSpinnerComponent
+  ],
+  bootstrap: [AppComponent], imports: [BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    LayoutModule,
+    MatSidenavModule,
+    MatListModule,
+    MatGridListModule,
+    DragDropModule,
+    MatCardModule,
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonToggleModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule], providers: [
+      StudentService, // service in app module make sure that I have 1 instance of the service all the time available as long as the app is running
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptorService,
+        multi: true
+      },
+      provideHttpClient(withInterceptorsFromDi())
+    ]
+})
 export class AppModule { }
